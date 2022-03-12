@@ -1,21 +1,21 @@
 package model;
 
-public class holiday {
+public class Holiday {
     private Integer id;
     private String name;
     private String description;
-    private Boolean is_active;
-    private  Boolean is_deleted;
+    private Boolean active;
+    private  Boolean deleted;
 
-    public holiday() {
+    public Holiday() {
     }
 
-    public holiday(Integer id, String name, String description, Boolean is_active, Boolean is_deleted) {
+    public Holiday(Integer id, String name, String description, Boolean active, Boolean deleted) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.is_active = is_active;
-        this.is_deleted = is_deleted;
+        this.active = active;
+        this.deleted = deleted;
     }
 
     public Integer getId() {
@@ -42,20 +42,20 @@ public class holiday {
         this.description = description;
     }
 
-    public Boolean getIs_active() {
-        return is_active;
+    public Boolean getActive() {
+        return active;
     }
 
-    public void setIs_active(Boolean is_active) {
-        this.is_active = is_active;
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
-    public Boolean getIs_deleted() {
-        return is_deleted;
+    public Boolean getDeleted() {
+        return deleted;
     }
 
-    public void setIs_deleted(Boolean is_deleted) {
-        this.is_deleted = is_deleted;
+    public void setDeleted(Boolean deleted) {
+        this.deleted = deleted;
     }
 
     @Override
@@ -64,8 +64,8 @@ public class holiday {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", is_active=" + is_active +
-                ", is_deleted=" + is_deleted +
+                ", is_active=" + active +
+                ", is_deleted=" + deleted +
                 '}';
     }
 }

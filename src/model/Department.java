@@ -1,19 +1,21 @@
 package model;
 
-public class role {
+public class Department {
     private Integer id;
     private String name;
     private String description;
-    private Boolean is_deleted;
+    private Integer departmentLeader;
+    private Boolean deleted;
 
-    public role() {
+    public Department() {
     }
 
-    public role(Integer id, String name, String description, Boolean is_deleted) {
+    public Department(Integer id, String name, String description, Integer departmentLeader, Boolean deleted) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.is_deleted = is_deleted;
+        this.departmentLeader = departmentLeader;
+        this.deleted = deleted;
     }
 
     public Integer getId() {
@@ -40,21 +42,30 @@ public class role {
         this.description = description;
     }
 
-    public Boolean getIs_deleted() {
-        return is_deleted;
+    public Integer getDepartmentLeader() {
+        return departmentLeader;
     }
 
-    public void setIs_deleted(Boolean is_deleted) {
-        this.is_deleted = is_deleted;
+    public void setDepartmentLeader(Integer departmentLeader) {
+        this.departmentLeader = departmentLeader;
+    }
+
+    public Boolean getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        this.deleted = deleted;
     }
 
     @Override
     public String toString() {
-        return "role{" +
+        return "department{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", is_deleted=" + is_deleted +
+                ", department_leader=" + departmentLeader +
+                ", is_deleted=" + deleted +
                 '}';
     }
 }
