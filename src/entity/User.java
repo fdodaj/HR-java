@@ -1,4 +1,4 @@
-package model;
+package entity;
 
 import java.util.Date;
 
@@ -16,6 +16,45 @@ public class User {
     private Integer paidTimeOff;
     private Boolean deleted;
     private String role;
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", birthday=" + birthday +
+                ", address='" + address + '\'' +
+                ", gender='" + gender + '\'' +
+                ", hireDate=" + hireDate +
+                ", paidTimeOff=" + paidTimeOff +
+                ", deleted=" + deleted +
+                ", role='" + role + '\'' +
+                '}';
+    }
+
+    public User() {
+    }
+
+    public User(Integer id, String firstName, String lastName, String email, String password, String phoneNumber, Date birthday, String address, String gender, Date hireDate, Integer paidTimeOff, Boolean deleted, String role) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.phoneNumber = phoneNumber;
+        this.birthday = birthday;
+        this.address = address;
+        this.gender = gender;
+        this.hireDate = hireDate;
+        this.paidTimeOff = paidTimeOff;
+        this.deleted = deleted;
+        this.role = role;
+    }
+
 
     public Integer getId() {
         return id;

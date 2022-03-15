@@ -2,13 +2,13 @@ package main;
 
 import java.util.Scanner;
 
-public final class UserMenu {
+public final class EmployeeMenu {
 
-    private UserMenu() {
+    private EmployeeMenu() {
     }
 
     public static void menu() {
-        System.out.println("User menu");
+        System.out.println("---------------Employee menu---------------");
         char exit;
         do {
             System.out.println("1) My details");

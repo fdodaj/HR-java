@@ -1,22 +1,19 @@
-package model;
+package entity;
 
 import java.util.Date;
 
 public class AuthenticatedUser {
     private Integer id;
+    private String firstName;
     private String email;
     private String password;
     private String role;
 
+
+
     public AuthenticatedUser() {
     }
 
-    public AuthenticatedUser(Integer id, String email, String password, String role) {
-        this.id = id;
-        this.email = email;
-        this.password = password;
-        this.role = role;
-    }
 
     public Integer getId() {
         return id;
@@ -26,6 +23,13 @@ public class AuthenticatedUser {
         this.id = id;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
     public String getEmail() {
         return email;

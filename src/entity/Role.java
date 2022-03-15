@@ -1,20 +1,18 @@
-package model;
+package entity;
 
-public class Holiday {
+public class Role {
     private Integer id;
     private String name;
     private String description;
-    private Boolean active;
-    private  Boolean deleted;
+    private Boolean deleted;
 
-    public Holiday() {
+    public Role() {
     }
 
-    public Holiday(Integer id, String name, String description, Boolean active, Boolean deleted) {
+    public Role(Integer id, String name, String description, Boolean deleted) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.active = active;
         this.deleted = deleted;
     }
 
@@ -42,14 +40,6 @@ public class Holiday {
         this.description = description;
     }
 
-    public Boolean getActive() {
-        return active;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
-
     public Boolean getDeleted() {
         return deleted;
     }
@@ -60,11 +50,10 @@ public class Holiday {
 
     @Override
     public String toString() {
-        return "holiday{" +
+        return "role{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", is_active=" + active +
                 ", is_deleted=" + deleted +
                 '}';
     }

@@ -1,19 +1,19 @@
 package service;
 
-import model.AuthenticatedUser;
-import model.User;
+import entity.AuthenticatedUser;
+import entity.User;
 
 import java.util.List;
 
 
 public interface UserService {
-    void addUser(User user);
+    User addUser(User user);
 
     User updateUser(User user);
 
-    boolean deleteUser(Integer id);
-
     User getUserById(Integer id);
+
+    User deleteUser(Integer id);
 
     List<User> getAllUsers();
 

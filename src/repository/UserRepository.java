@@ -1,22 +1,66 @@
 package repository;
 
-import com.mysql.cj.jdbc.JdbcConnection;
-import model.AuthenticatedUser;
-import model.User;
+import entity.AuthenticatedUser;
+import entity.User;
+import util.DatabaseConnection;
 
 import java.sql.*;
 
-import static util.UserQueries.FIND_USER_BY_ID;
-import static util.UserQueries.LOGIN_USER;
+import static util.UserQueries.*;
 
 public class UserRepository {
+    Connection connection = DatabaseConnection.getConnection();
+
+
+
+
+    public User save(User user) {
+
+        try (PreparedStatement statement = connection.prepareStatement(ADD_USER)) {
+
+            statement.setInt(1, user.getId());
+            statement.setString(2, user.getFirstName());
+            statement.setString(3, user.getLastName());
+            statement.setString(4, user.getEmail());
+            statement.setString(5, user.getPassword());
+            statement.setString(6, user.getPhoneNumber());
+            statement.setDate(7, (Date) user.getBirthday());
+            statement.setString(8, user.getAddress());
+            statement.setString(9, user.getGender());
+            statement.setDate(10, (Date) user.getHireDate());
+            statement.setInt(11, user.getPaidTimeOff());
+            statement.setBoolean(12, user.getDeleted());
+            statement.setString(13, user.getRole());
+
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        return user;
+
+    }
+
+    public User delete(Integer id) {
+        User user = null;
+        try (PreparedStatement statement = connection.prepareStatement(DELETE_USER)) {
+
+            statement.setInt(1, id);
+            statement.setBoolean(1, true);
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        return user;
+
+    }
 
 
 
     public User findUserById(Integer id) {
         User user = null;
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hr", "root", "root");
-             PreparedStatement statement = connection.prepareStatement(FIND_USER_BY_ID);) {
+        try (PreparedStatement statement = connection.prepareStatement(FIND_USER_BY_ID)) {
             statement.setInt(1, id);
             ResultSet result = statement.executeQuery();
             if (result.next()) {
@@ -42,10 +86,12 @@ public class UserRepository {
         }
         return user;
     }
+
+
+
     public AuthenticatedUser authenticate(String email, String password) {
         AuthenticatedUser auth = null;
-        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hr", "root", "root");
-             PreparedStatement statement = connection.prepareStatement(LOGIN_USER)) {
+        try (PreparedStatement statement = connection.prepareStatement(LOGIN_USER)) {
             statement.setString(1, email);
             statement.setString(2, password);
             ResultSet result = statement.executeQuery();
@@ -55,10 +101,43 @@ public class UserRepository {
                 auth.setEmail(result.getString(2));
                 auth.setPassword(result.getString(3));
                 auth.setRole(result.getString(4));
+                auth.setFirstName(result.getString(5));
             }
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
         return auth;
     }
+
+
+
+    public User getUserById(Integer id) {
+        User user = null;
+        try (PreparedStatement statement = connection.prepareStatement(GET_INFO)) {
+            statement.setInt(1, id);
+            ResultSet result = statement.executeQuery();
+
+
+            if (result.next()) {
+                user = new User();
+                user.setId(result.getInt("id"));
+                user.setFirstName(result.getString(2));
+                user.setLastName(result.getString(3));
+                user.setEmail(result.getString(4));
+                user.setPassword(result.getString(5));
+                user.setPhoneNumber(result.getString(6));
+                user.setBirthday(result.getDate(7));
+                user.setAddress(result.getString(8));
+                user.setGender(result.getString(9));
+                user.setHireDate(result.getDate(10));
+                user.setPaidTimeOff(result.getInt(11));
+                user.setDeleted(result.getBoolean(12));
+                user.setRole(result.getString(4));
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        return user;
+    }
+
 }

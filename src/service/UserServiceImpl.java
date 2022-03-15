@@ -1,19 +1,19 @@
 package service;
 
-import model.AuthenticatedUser;
-import model.User;
+import entity.AuthenticatedUser;
+import entity.User;
 import repository.UserRepository;
 
-import java.util.Collections;
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
 
     UserRepository userRepository = new UserRepository();
 
-    @Override
-    public void addUser(User user) {
 
+    @Override
+    public User addUser(User user) {
+        return userRepository.save(user);
     }
 
     @Override
@@ -22,25 +22,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean deleteUser(Integer id) {
-        return false;
+    public User getUserById(Integer id) {
+        return  userRepository.getUserById(id);
     }
 
     @Override
-    public User getUserById(Integer id) {
-        return null;
+    public User deleteUser(Integer id) {
+        return userRepository.delete(id);
     }
 
     @Override
     public List<User> getAllUsers() {
-        return Collections.emptyList();
+        return null;
     }
 
     @Override
     public AuthenticatedUser loginUser(String email, String password) {
        return userRepository.authenticate(email, password);
     }
-
 
 
 }
