@@ -1,10 +1,11 @@
 package service;
 
 import entity.Holiday;
-import entity.User;
 import repository.HolidayRepository;
 
-public class HoldiayService {
+import java.util.List;
+
+public class HolidayServicesImpl implements HolidayService {
 
     HolidayRepository holidayRepository = new HolidayRepository();
 
@@ -16,9 +17,11 @@ public class HoldiayService {
         return  holidayRepository.getHolidayById(id);
     }
 
-    public String listHolidays(){
-        return  holidayRepository.getHoliday();
+    @Override
+    public void listHolidays() {
+      holidayRepository.getHoliday();
     }
+
 
     public Holiday deleteHoliday(Integer id) {
         return holidayRepository.delete(id);

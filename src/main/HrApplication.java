@@ -54,7 +54,7 @@ public class HrApplication {
         String password = SCANNER.nextLine();
         AuthenticatedUser auth = null;
         if (!email.isEmpty() && !password.isEmpty()) {
-            UserService userService = new UserServiceImpl();
+            UserServiceImpl userService = new UserServiceImpl();
              auth = userService.loginUser(email, password);
         }
         if(Objects.isNull(auth)) throw new HrAuthException("Nuk mund te aksesosh sistemin");

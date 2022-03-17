@@ -1,9 +1,10 @@
 package repository;
 import entity.Holiday;
-import entity.User;
 import util.DatabaseConnection;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import static util.UserQueries.*;
 
@@ -48,23 +49,24 @@ public class HolidayRepository {
         return holiday;
     }
 
-    public  String getHoliday(){
+    public void getHoliday(){
         Holiday holiday = null;
         try (PreparedStatement statement = connection.prepareStatement(GET_ALL_HOLIDAY)){
             ResultSet result = statement.executeQuery();
 
             while (result.next()) {
+                List<Holiday> holidays = new ArrayList<>();
                 int id  = result.getInt("id");
                 String name = result.getString("name");
                 String description = result.getString("description");
-                Boolean active = result.getBoolean("is_active");
-                Boolean deleted = result.getBoolean("is_deleted");
-                System.out.println(id + "," + name + "," + deleted + "," + active + "," + deleted );
+                boolean active = result.getBoolean("is_active");
+                boolean deleted = result.getBoolean("is_deleted");
+                System.out.println(id + ", " + name + ", " + description + ", " + active + ", " + deleted);
+
             }
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
-        return "All holidays";
     }
 
 

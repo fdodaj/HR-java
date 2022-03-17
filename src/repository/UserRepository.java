@@ -103,7 +103,7 @@ public class UserRepository {
 
 
 
-    public String listUsers() {
+    public void listUsers() {
         User user = null;
         try (PreparedStatement statement = connection.prepareStatement(GET_ALL_USERS)) {
             ResultSet result = statement.executeQuery();
@@ -131,7 +131,6 @@ public class UserRepository {
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
-        return "All registered users";
     }
 
 }

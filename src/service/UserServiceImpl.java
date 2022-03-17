@@ -32,14 +32,13 @@ public class UserServiceImpl implements UserService {
     }
 
 
-
     @Override
     public AuthenticatedUser loginUser(String email, String password) {
        return userRepository.authenticate(email, password);
     }
 
-    public String listUsers(){
-        return userRepository.listUsers();
+    public void listUsers(){
+        userRepository.listUsers();
     }
 
 }
