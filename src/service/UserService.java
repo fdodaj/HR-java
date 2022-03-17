@@ -15,8 +15,6 @@ public interface UserService {
 
     User deleteUser(Integer id);
 
-    List<User> getAllUsers();
-
     AuthenticatedUser loginUser(String email, String password);
 
 

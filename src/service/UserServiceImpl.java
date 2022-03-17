@@ -31,15 +31,15 @@ public class UserServiceImpl implements UserService {
         return userRepository.delete(id);
     }
 
-    @Override
-    public List<User> getAllUsers() {
-        return null;
-    }
+
 
     @Override
     public AuthenticatedUser loginUser(String email, String password) {
        return userRepository.authenticate(email, password);
     }
 
+    public String listUsers(){
+        return userRepository.listUsers();
+    }
 
 }

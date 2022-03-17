@@ -11,9 +11,6 @@ import static util.UserQueries.*;
 public class UserRepository {
     Connection connection = DatabaseConnection.getConnection();
 
-
-
-
     public User save(User user) {
 
         try (PreparedStatement statement = connection.prepareStatement(ADD_USER)) {
@@ -57,38 +54,6 @@ public class UserRepository {
     }
 
 
-
-    public User findUserById(Integer id) {
-        User user = null;
-        try (PreparedStatement statement = connection.prepareStatement(FIND_USER_BY_ID)) {
-            statement.setInt(1, id);
-            ResultSet result = statement.executeQuery();
-            if (result.next()) {
-                user = new User();
-                user.setId(result.getInt(1));
-                user.setFirstName(result.getString(2));
-                user.setLastName(result.getString(3));
-                user.setEmail(result.getString(4));
-                user.setPassword(result.getString(5));
-                user.setPhoneNumber(result.getString(6));
-                user.setBirthday(result.getDate(7));
-                user.setAddress(result.getString(8));
-                user.setGender(result.getString(9));
-                user.setHireDate(result.getDate(10));
-                user.setPaidTimeOff(result.getInt(11));
-                user.setDeleted(result.getBoolean(12));
-                user.setRole(result.getString(13));
-
-            }
-        } catch (SQLException e) {
-            System.err.println(e.getMessage());
-
-        }
-        return user;
-    }
-
-
-
     public AuthenticatedUser authenticate(String email, String password) {
         AuthenticatedUser auth = null;
         try (PreparedStatement statement = connection.prepareStatement(LOGIN_USER)) {
@@ -109,15 +74,11 @@ public class UserRepository {
         return auth;
     }
 
-
-
     public User getUserById(Integer id) {
         User user = null;
         try (PreparedStatement statement = connection.prepareStatement(GET_INFO)) {
             statement.setInt(1, id);
             ResultSet result = statement.executeQuery();
-
-
             if (result.next()) {
                 user = new User();
                 user.setId(result.getInt("id"));
@@ -138,6 +99,39 @@ public class UserRepository {
             System.err.println(e.getMessage());
         }
         return user;
+    }
+
+
+
+    public String listUsers() {
+        User user = null;
+        try (PreparedStatement statement = connection.prepareStatement(GET_ALL_USERS)) {
+            ResultSet result = statement.executeQuery();
+
+
+            while (result.next()) {
+                int id  = result.getInt("id");
+                String firstName = result.getString("first_name");
+                String lastName = result.getString("last_name");
+                String email = result.getString("email");
+                String password = result.getString("password");
+                String phoneNumber = result.getString("phone_number");
+                Date date = result.getDate("birthday");
+                String address  = result.getString("address");
+                String gender = result.getString("gender");
+                Date hireDate = result.getDate("hire_date");
+                int paidTimeOff = result.getInt("paid_time_off");
+                boolean deleted = result.getBoolean("is_deleted");
+                String role = result.getString("role");
+                System.out.println(id + ", " + firstName + ", " + lastName + ", " + email + ", " + password + ", " + password
+                        + ", " + phoneNumber + ", " + date + ", " + address  + ", " + gender  + ", " + hireDate
+                        + ", " + paidTimeOff  + ", " + deleted  + ", " + role
+                );
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        return "All registered users";
     }
 
 }
