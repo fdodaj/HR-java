@@ -1,12 +1,9 @@
 package repository;
 import entity.Department;
-import entity.Holiday;
-import entity.User;
 import util.DatabaseConnection;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+
 
 import static util.UserQueries.*;
 

@@ -22,6 +22,12 @@ public final class UserQueries {
     public static final String DELETE_DEPARTMENT = "UPDATE department SET is_deleted = true where id = ?";
 
 
+    public static final String GET_ALL_PERMISSIONS = "SELECT * FROM request_permission";
+    public static final String GET_PERMISSION_BY_ID = "SELECT * FROM request_permission where id = ?";
+    public static final String CREATE_PERMISSION = "INSERT INTO request_permission(`id`, `user`, `from_date`, `to_date`, `reason`, `business_days`, `request_type`, `request_status`, `is_deleted`) VALUES(?, ?, ?, ?, ?,?, ?, ?, ?)";
+    public static final String DELETE_PERMISSION = "UPDATE request_permission SET is_deleted = true where id = ?";
+
+
 
 
 }
