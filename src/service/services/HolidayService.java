@@ -1,4 +1,4 @@
-package service;
+package service.services;
 
 import entity.Holiday;
 
@@ -10,7 +10,7 @@ public interface HolidayService {
 
     Holiday getHolidayById(Integer id);
 
-    void listHolidays();
+    List<Holiday> listHolidays();
 
     Holiday deleteHoliday(Integer id);
 }

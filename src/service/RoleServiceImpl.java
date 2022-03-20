@@ -2,12 +2,15 @@ package service;
 
 import entity.Role;
 import repository.RoleRepository;
+import service.services.RoleService;
 
-public class RoleServiceImpl implements RoleService{
+import java.util.List;
+
+public class RoleServiceImpl implements RoleService {
     RoleRepository roleRepository = new RoleRepository();
     @Override
-    public void getAllRoles() {
-        roleRepository.getAllRoles();
+    public List<Role> listRoles() {
+       return roleRepository.listRoles();
     }
 
     @Override

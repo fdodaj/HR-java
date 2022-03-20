@@ -5,6 +5,8 @@ import entity.User;
 import util.DatabaseConnection;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import static util.UserQueries.*;
 
@@ -103,34 +105,33 @@ public class UserRepository {
 
 
 
-    public void listUsers() {
+    public List<User> listUsers() {
         User user = null;
+        List<User> users = new ArrayList<>();
         try (PreparedStatement statement = connection.prepareStatement(GET_ALL_USERS)) {
             ResultSet result = statement.executeQuery();
 
 
             while (result.next()) {
-                int id  = result.getInt("id");
-                String firstName = result.getString("first_name");
-                String lastName = result.getString("last_name");
-                String email = result.getString("email");
-                String password = result.getString("password");
-                String phoneNumber = result.getString("phone_number");
-                Date date = result.getDate("birthday");
-                String address  = result.getString("address");
-                String gender = result.getString("gender");
-                Date hireDate = result.getDate("hire_date");
-                int paidTimeOff = result.getInt("paid_time_off");
-                boolean deleted = result.getBoolean("is_deleted");
-                String role = result.getString("role");
-                System.out.println(id + ", " + firstName + ", " + lastName + ", " + email + ", " + password + ", " + password
-                        + ", " + phoneNumber + ", " + date + ", " + address  + ", " + gender  + ", " + hireDate
-                        + ", " + paidTimeOff  + ", " + deleted  + ", " + role
-                );
+                user = new User();
+                user.setId(result.getInt("id"));
+                user.setFirstName(result.getString(2));
+                user.setLastName(result.getString(3));
+                user.setEmail(result.getString(4));
+                user.setPassword(result.getString(5));
+                user.setPhoneNumber(result.getString(6));
+                user.setBirthday(result.getDate(7));
+                user.setAddress(result.getString(8));
+                user.setGender(result.getString(9));
+                user.setHireDate(result.getDate(10));
+                user.setPaidTimeOff(result.getInt(11));
+                user.setDeleted(result.getBoolean(12));
+                user.setRole(result.getString(4));
+                users.add(user);
             }
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
+        return users;
     }
-
 }

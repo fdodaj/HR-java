@@ -2,13 +2,16 @@ package service;
 
 import entity.Department;
 import repository.DepartmentRepository;
+import service.services.DepartmentService;
+
+import java.util.List;
 
 
-public class DepartmentServiceImpl implements  DepartmentService{
+public class DepartmentServiceImpl implements DepartmentService {
     DepartmentRepository departmentRepository = new DepartmentRepository();
     @Override
-    public void listDepartments() {
-            departmentRepository.listDepartments();
+    public List<Department> listDepartments() {
+        return departmentRepository.listDepartments();
     }
     @Override
     public Department addDepartment(Department department) {

@@ -1,13 +1,10 @@
 package main;
 
-import entity.User;
-import service.UserService;
 import service.UserServiceImpl;
 
 import java.util.Scanner;
 
 import static main.HrApplication.auth;
-import static main.HrApplication.SCANNER;
 
 
 public class DepartmentLeaderMenu {

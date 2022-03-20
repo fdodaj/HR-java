@@ -1,4 +1,4 @@
-package service;
+package service.services;
 
 import entity.AuthenticatedUser;
 import entity.User;
@@ -16,6 +16,8 @@ public interface UserService {
     User deleteUser(Integer id);
 
     AuthenticatedUser loginUser(String email, String password);
+
+    List<User> listUsers();
 
 
 }

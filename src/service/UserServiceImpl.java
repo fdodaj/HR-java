@@ -3,6 +3,7 @@ package service;
 import entity.AuthenticatedUser;
 import entity.User;
 import repository.UserRepository;
+import service.services.UserService;
 
 import java.util.List;
 
@@ -37,8 +38,10 @@ public class UserServiceImpl implements UserService {
        return userRepository.authenticate(email, password);
     }
 
-    public void listUsers(){
-        userRepository.listUsers();
+    @Override
+    public List<User> listUsers() {
+        return userRepository.listUsers();
     }
+
 
 }

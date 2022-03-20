@@ -2,6 +2,7 @@ package service;
 
 import entity.Holiday;
 import repository.HolidayRepository;
+import service.services.HolidayService;
 
 import java.util.List;
 
@@ -18,8 +19,8 @@ public class HolidayServicesImpl implements HolidayService {
     }
 
     @Override
-    public void listHolidays() {
-      holidayRepository.getHoliday();
+    public List<Holiday> listHolidays() {
+      return holidayRepository.listHolidays();
     }
 
 

@@ -1,10 +1,22 @@
 package entity;
+import java.util.List;
 
-public class Role {
+import entity.User;
+
+public class Role{
     private Integer id;
     private String name;
     private String description;
     private Boolean deleted;
+    private User user;
+
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    private List<User> users;
+
 
     public Role() {
     }

@@ -49,24 +49,26 @@ public class HolidayRepository {
         return holiday;
     }
 
-    public void getHoliday(){
+    public List<Holiday> listHolidays(){
         Holiday holiday = null;
+        List<Holiday> holidays = new ArrayList<>();
         try (PreparedStatement statement = connection.prepareStatement(GET_ALL_HOLIDAY)){
             ResultSet result = statement.executeQuery();
 
             while (result.next()) {
-                List<Holiday> holidays = new ArrayList<>();
-                int id  = result.getInt("id");
-                String name = result.getString("name");
-                String description = result.getString("description");
-                boolean active = result.getBoolean("is_active");
-                boolean deleted = result.getBoolean("is_deleted");
-                System.out.println(id + ", " + name + ", " + description + ", " + active + ", " + deleted);
+                holiday = new Holiday();
+                holiday.setId(result.getInt("id"));
+                holiday.setName(result.getString("name"));
+                holiday.setDescription(result.getString("description"));
+                holiday.setActive(result.getBoolean("is_active"));
+                holiday.setDeleted(result.getBoolean("is_deleted"));
+                holidays.add(holiday);
 
             }
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
+        return holidays;
     }
 
 

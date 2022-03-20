@@ -1,8 +1,7 @@
 package util;
 
 public final class UserQueries {
-    private UserQueries() {
-    }
+    private UserQueries() {}
 
     public static final String LOGIN_USER = "SELECT  id, email, password, role , first_name FROM user WHERE email = ? AND password = ?";
     public static final String GET_INFO = "SELECT * FROM user WHERE id = ?";

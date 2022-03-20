@@ -1,9 +1,7 @@
 package main;
 
 import entity.AuthenticatedUser;
-import entity.User;
 import service.HrAuthException;
-import service.UserService;
 import service.UserServiceImpl;
 
 import java.util.Objects;

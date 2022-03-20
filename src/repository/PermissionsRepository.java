@@ -5,6 +5,8 @@ import entity.RequestPermission;
 import util.DatabaseConnection;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import static util.UserQueries.*;
 import static util.UserQueries.GET_DEPARTMENT_BY_ID;
@@ -33,27 +35,29 @@ public class PermissionsRepository {
         return requestPermission;
     }
 
-    public void listAllPermissions(){
+    public List<RequestPermission> listPermissions(){
         RequestPermission requestPermission = null;
+        List<RequestPermission> requestPermissions = new ArrayList<>();
         try (PreparedStatement statement = connection.prepareStatement(GET_ALL_PERMISSIONS)){
             ResultSet result = statement.executeQuery();
 
             while (result.next()) {
-                int id  = result.getInt("id");
-                int user = result.getInt("user");
-                Date fromDate = result.getDate("from_date");
-                Date toDate = result.getDate("to_date");
-                String reason = result.getString("reason");
-                int businessDays = result.getInt("business_days");
-                String requestType = result.getString("request_type");
-                String requestStatus = result.getString("request_status");
-                boolean deleted = result.getBoolean("is_deleted");
-                System.out.println(id + ", " + user + ", " + fromDate + ", " + toDate + ", " + reason + ", " + businessDays + ", " + requestType + ", " + requestStatus + ", " + deleted );
-
+                requestPermission = new RequestPermission();
+                requestPermission.setId(result.getInt("id"));
+                requestPermission.setUser(result.getInt("user"));
+                requestPermission.setFromDate(result.getDate("from_date"));
+                requestPermission.setToDate(result.getDate("to_date"));
+                requestPermission.setReason(result.getString("reason"));
+                requestPermission.setBusinessDays(result.getInt("business_days"));
+                requestPermission.setRequestType(result.getString("request_type"));
+                requestPermission.setRequestStatus(result.getString("request_status"));
+                requestPermission.setDeleted(result.getBoolean("is_deleted"));
+                requestPermissions.add(requestPermission);
             }
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
+        return requestPermissions;
     }
 
     public RequestPermission delete(Integer id) {

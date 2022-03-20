@@ -1,10 +1,12 @@
-package service;
+package service.services;
 
 import entity.Department;
 
+import java.util.List;
+
 public interface DepartmentService {
 
-    void listDepartments();
+    List<Department> listDepartments();
 
     Department addDepartment(Department department);
 

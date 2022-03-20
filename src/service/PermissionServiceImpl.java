@@ -1,14 +1,16 @@
 package service;
 
-import entity.Department;
 import entity.RequestPermission;
 import repository.PermissionsRepository;
+import service.services.PermissionService;
+
+import java.util.List;
 
 public class PermissionServiceImpl implements PermissionService {
     PermissionsRepository permissionsRepository = new PermissionsRepository();
     @Override
-    public void listAllPermissions() {
-        permissionsRepository.listAllPermissions();
+    public List<RequestPermission> listPermissions() {
+        return permissionsRepository.listPermissions();
     }
 
     @Override

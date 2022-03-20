@@ -17,6 +17,7 @@ public class User {
     private Boolean deleted;
     private String role;
 
+
     @Override
     public String toString() {
         return "User{" +

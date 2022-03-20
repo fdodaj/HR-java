@@ -6,6 +6,8 @@ import entity.User;
 import util.DatabaseConnection;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import static util.UserQueries.*;
 
@@ -30,22 +32,25 @@ public class RoleRepository {
         }
 
     }
-    public void getAllRoles(){
+
+    public List<Role> listRoles(){
         Role role = null;
+        List<Role> roles = new ArrayList<>();
         try (PreparedStatement statement = connection.prepareStatement(GET_ALL_ROLES)){
             ResultSet result = statement.executeQuery();
 
             while (result.next()) {
-                int id  = result.getInt("id");
-                String name = result.getString("name");
-                String description = result.getString("description");
-                boolean deleted = result.getBoolean("is_deleted");
-                System.out.println(id + ", " + name + ", " + description + ", " + deleted);
-
+                role = new Role();
+                role.setId(result.getInt("id"));
+                role.setName(result.getString("name"));
+                role.setDescription(result.getString("description"));
+                role.setDeleted(result.getBoolean("is_deleted"));
+                roles.add(role);
             }
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
+        return roles;
     }
 
     public Role delete(Integer id) {

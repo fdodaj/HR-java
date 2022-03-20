@@ -1,11 +1,13 @@
-package service;
+package service.services;
 
 
 import entity.Department;
 import entity.RequestPermission;
 
+import java.util.List;
+
 public interface PermissionService {
-    void listAllPermissions();
+    List<RequestPermission> listPermissions();
 
     RequestPermission createPermission(RequestPermission requestPermission);
 

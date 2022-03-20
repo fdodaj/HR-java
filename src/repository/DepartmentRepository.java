@@ -3,6 +3,8 @@ import entity.Department;
 import util.DatabaseConnection;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 import static util.UserQueries.*;
@@ -27,23 +29,26 @@ public class DepartmentRepository {
         return department;
     }
 
-    public void listDepartments(){
+    public List<Department> listDepartments(){
         Department department = null;
+        List<Department> departments = new ArrayList<>();
         try (PreparedStatement statement = connection.prepareStatement(GET_ALL_DEPARTMENTS)){
             ResultSet result = statement.executeQuery();
 
             while (result.next()) {
-                int id  = result.getInt("id");
-                String name = result.getString("name");
-                String description = result.getString("description");
-                int departmentLeader = result.getInt("department_leader");
-                boolean deleted = result.getBoolean("is_deleted");
-                System.out.println(id + ", " + name + ", " + description + ", " + departmentLeader + ", " + deleted);
+                department = new Department();
+                department.setId(result.getInt("id"));
+                department.setName(result.getString("name"));
+                department.setDescription(result.getString("description"));
+                department.setDepartmentLeader(result.getInt("department_leader"));
+                department.setDeleted(result.getBoolean("is_deleted"));
+                departments.add(department);
 
             }
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }
+        return departments;
     }
 
     public Department delete(Integer id) {
