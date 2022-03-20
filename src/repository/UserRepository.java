@@ -114,7 +114,7 @@ public class UserRepository {
 
             while (result.next()) {
                 user = new User();
-                user.setId(result.getInt("id"));
+                user.setId(result.getInt("user_id"));
                 user.setFirstName(result.getString(2));
                 user.setLastName(result.getString(3));
                 user.setEmail(result.getString(4));

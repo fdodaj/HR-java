@@ -37,7 +37,7 @@ public class DepartmentRepository {
 
             while (result.next()) {
                 department = new Department();
-                department.setId(result.getInt("id"));
+                department.setId(result.getInt("department_id"));
                 department.setName(result.getString("name"));
                 department.setDescription(result.getString("description"));
                 department.setDepartmentLeader(result.getInt("department_leader"));
@@ -72,7 +72,7 @@ public class DepartmentRepository {
             ResultSet result = statement.executeQuery();
             if (result.next()) {
                 department = new Department();
-                department.setId(result.getInt("id"));
+                department.setId(result.getInt("department_id"));
                 department.setName(result.getString("name"));
                 department.setDescription(result.getString("description"));
                 department.setDepartmentLeader(result.getInt("department_leader"));

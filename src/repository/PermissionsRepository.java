@@ -43,7 +43,7 @@ public class PermissionsRepository {
 
             while (result.next()) {
                 requestPermission = new RequestPermission();
-                requestPermission.setId(result.getInt("id"));
+                requestPermission.setId(result.getInt("request_permission_id"));
                 requestPermission.setUser(result.getInt("user"));
                 requestPermission.setFromDate(result.getDate("from_date"));
                 requestPermission.setToDate(result.getDate("to_date"));
@@ -81,7 +81,7 @@ public class PermissionsRepository {
             ResultSet result = statement.executeQuery();
             if (result.next()) {
                 requestPermission = new RequestPermission();
-                requestPermission.setId(result.getInt("id"));
+                requestPermission.setId(result.getInt("request_permission_id"));
                 requestPermission.setUser(result.getInt("user"));
                 requestPermission.setFromDate(result.getDate("from_date"));
                 requestPermission.setToDate(result.getDate("to_date"));

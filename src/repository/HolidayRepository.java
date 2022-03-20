@@ -37,7 +37,7 @@ public class HolidayRepository {
 
             if (result.next()) {
                 holiday = new Holiday();
-                holiday.setId(result.getInt("id"));
+                holiday.setId(result.getInt("holiday_id"));
                 holiday.setName(result.getString("name"));
                 holiday.setDescription(result.getString("description"));
                 holiday.setActive(result.getBoolean("is_active"));
@@ -57,7 +57,7 @@ public class HolidayRepository {
 
             while (result.next()) {
                 holiday = new Holiday();
-                holiday.setId(result.getInt("id"));
+                holiday.setId(result.getInt("holiday_id"));
                 holiday.setName(result.getString("name"));
                 holiday.setDescription(result.getString("description"));
                 holiday.setActive(result.getBoolean("is_active"));

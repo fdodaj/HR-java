@@ -17,10 +17,9 @@ public class TestQueries {
 
 
         System.out.println(userService.listUsers().toString());
-        System.out.println(holidayService.listHolidays().toString());
-        System.out.println(permissionService.listPermissions().toString());
-        System.out.println(roleService.listRoles().toString());
-        System.out.println(departmentService.listDepartments().toString());
-//    }
+//        System.out.println(holidayService.listHolidays().toString());
+//        System.out.println(permissionService.listPermissions().toString());
+//        System.out.println(roleService.listRoles().toString());
+//        System.out.println(departmentService.listDepartments().toString());
     }
 }
