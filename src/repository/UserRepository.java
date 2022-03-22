@@ -22,14 +22,13 @@ public class UserRepository {
             statement.setString(3, user.getLastName());
             statement.setString(4, user.getEmail());
             statement.setString(5, user.getPassword());
-            statement.setString(6, user.getPhoneNumber());
-            statement.setDate(7, (Date) user.getBirthday());
-            statement.setString(8, user.getAddress());
-            statement.setString(9, user.getGender());
-            statement.setDate(10, (Date) user.getHireDate());
-            statement.setInt(11, user.getPaidTimeOff());
-            statement.setBoolean(12, user.getDeleted());
-            statement.setString(13, user.getRole());
+            statement.setDate(6, (Date) user.getBirthday());
+            statement.setString(7, user.getGender());
+            statement.setDate(8, (Date) user.getHireDate());
+            statement.setInt(9, user.getPaidTimeOff());
+            statement.setBoolean(10, user.getDeleted());
+            statement.setInt(11, user.getRole_id());
+            statement.setInt(12, user.getDepartment_id());
 
             statement.executeUpdate();
 
@@ -84,18 +83,17 @@ public class UserRepository {
             if (result.next()) {
                 user = new User();
                 user.setId(result.getInt("id"));
-                user.setFirstName(result.getString(2));
-                user.setLastName(result.getString(3));
-                user.setEmail(result.getString(4));
-                user.setPassword(result.getString(5));
-                user.setPhoneNumber(result.getString(6));
-                user.setBirthday(result.getDate(7));
-                user.setAddress(result.getString(8));
-                user.setGender(result.getString(9));
-                user.setHireDate(result.getDate(10));
-                user.setPaidTimeOff(result.getInt(11));
-                user.setDeleted(result.getBoolean(12));
-                user.setRole(result.getString(4));
+                user.setFirstName(result.getString("first_name"));
+                user.setLastName(result.getString("last_name"));
+                user.setEmail(result.getString("email"));
+                user.setPassword(result.getString("password"));
+                user.setBirthday(result.getDate("birthday"));
+                user.setGender(result.getString("gender"));
+                user.setHireDate(result.getDate("hire_date"));
+                user.setPaidTimeOff(result.getInt("paid_time_off"));
+                user.setDeleted(result.getBoolean("is_deleted"));
+                user.setRole_id(result.getInt("role_id"));
+                user.setDepartment_id(result.getInt("department_id"));
             }
         } catch (SQLException e) {
             System.err.println(e.getMessage());
@@ -114,19 +112,18 @@ public class UserRepository {
 
             while (result.next()) {
                 user = new User();
-                user.setId(result.getInt("user_id"));
-                user.setFirstName(result.getString(2));
-                user.setLastName(result.getString(3));
-                user.setEmail(result.getString(4));
-                user.setPassword(result.getString(5));
-                user.setPhoneNumber(result.getString(6));
-                user.setBirthday(result.getDate(7));
-                user.setAddress(result.getString(8));
-                user.setGender(result.getString(9));
-                user.setHireDate(result.getDate(10));
-                user.setPaidTimeOff(result.getInt(11));
-                user.setDeleted(result.getBoolean(12));
-                user.setRole(result.getString(4));
+                user.setId(result.getInt("id"));
+                user.setFirstName(result.getString("first_name"));
+                user.setLastName(result.getString("last_name"));
+                user.setEmail(result.getString("email"));
+                user.setPassword(result.getString("password"));
+                user.setBirthday(result.getDate("birthday"));
+                user.setGender(result.getString("gender"));
+                user.setHireDate(result.getDate("hire_date"));
+                user.setPaidTimeOff(result.getInt("paid_time_off"));
+                user.setDeleted(result.getBoolean("is_deleted"));
+                user.setRole_id(result.getInt("role_id"));
+                user.setDepartment_id(result.getInt("department_id"));
                 users.add(user);
             }
         } catch (SQLException e) {

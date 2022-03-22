@@ -8,54 +8,30 @@ public class User {
     private String lastName;
     private String email;
     private String password;
-    private String phoneNumber;
     private Date birthday;
-    private String address;
     private String gender;
     private Date hireDate;
     private Integer paidTimeOff;
     private Boolean deleted;
-    private String role;
+    private int role_id;
+    private int department_id;
 
+    public User() {}
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", birthday=" + birthday +
-                ", address='" + address + '\'' +
-                ", gender='" + gender + '\'' +
-                ", hireDate=" + hireDate +
-                ", paidTimeOff=" + paidTimeOff +
-                ", deleted=" + deleted +
-                ", role='" + role + '\'' +
-                '}';
-    }
-
-    public User() {
-    }
-
-    public User(Integer id, String firstName, String lastName, String email, String password, String phoneNumber, Date birthday, String address, String gender, Date hireDate, Integer paidTimeOff, Boolean deleted, String role) {
+    public User(Integer id, String firstName, String lastName, String email, String password, Date birthday, String gender, Date hireDate, Integer paidTimeOff, Boolean deleted, int role_id, int department_id) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.phoneNumber = phoneNumber;
         this.birthday = birthday;
-        this.address = address;
         this.gender = gender;
         this.hireDate = hireDate;
         this.paidTimeOff = paidTimeOff;
         this.deleted = deleted;
-        this.role = role;
+        this.role_id = role_id;
+        this.department_id = department_id;
     }
-
 
     public Integer getId() {
         return id;
@@ -97,28 +73,12 @@ public class User {
         this.password = password;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
     public Date getBirthday() {
         return birthday;
     }
 
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public String getGender() {
@@ -153,11 +113,37 @@ public class User {
         this.deleted = deleted;
     }
 
-    public String getRole() {
-        return role;
+    public int getRole_id() {
+        return role_id;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setRole_id(int role_id) {
+        this.role_id = role_id;
+    }
+
+    public int getDepartment_id() {
+        return department_id;
+    }
+
+    public void setDepartment_id(int department_id) {
+        this.department_id = department_id;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", birthday=" + birthday +
+                ", gender='" + gender + '\'' +
+                ", hireDate=" + hireDate +
+                ", paidTimeOff=" + paidTimeOff +
+                ", deleted=" + deleted +
+                ", role_id=" + role_id +
+                ", department_id=" + department_id +
+                '}';
     }
 }

@@ -4,17 +4,15 @@ public class Department {
     private Integer id;
     private String name;
     private String description;
-    private Integer departmentLeader;
     private Boolean deleted;
 
     public Department() {
     }
 
-    public Department(Integer id, String name, String description, Integer departmentLeader, Boolean deleted) {
+    public Department(Integer id, String name, String description,  Boolean deleted) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.departmentLeader = departmentLeader;
         this.deleted = deleted;
     }
 
@@ -42,14 +40,6 @@ public class Department {
         this.description = description;
     }
 
-    public Integer getDepartmentLeader() {
-        return departmentLeader;
-    }
-
-    public void setDepartmentLeader(Integer departmentLeader) {
-        this.departmentLeader = departmentLeader;
-    }
-
     public Boolean getDeleted() {
         return deleted;
     }
@@ -64,7 +54,6 @@ public class Department {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", department_leader=" + departmentLeader +
                 ", is_deleted=" + deleted +
                 '}';
     }

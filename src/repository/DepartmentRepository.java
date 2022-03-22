@@ -19,7 +19,6 @@ public class DepartmentRepository {
             statement.setInt(1, department.getId());
             statement.setString(2, department.getName());
             statement.setString(3, department.getDescription());
-            statement.setInt(4, department.getDepartmentLeader());
             statement.setBoolean(5, department.getDeleted());
             statement.executeUpdate();
 
@@ -37,10 +36,9 @@ public class DepartmentRepository {
 
             while (result.next()) {
                 department = new Department();
-                department.setId(result.getInt("department_id"));
+                department.setId(result.getInt("id"));
                 department.setName(result.getString("name"));
                 department.setDescription(result.getString("description"));
-                department.setDepartmentLeader(result.getInt("department_leader"));
                 department.setDeleted(result.getBoolean("is_deleted"));
                 departments.add(department);
 
@@ -72,10 +70,9 @@ public class DepartmentRepository {
             ResultSet result = statement.executeQuery();
             if (result.next()) {
                 department = new Department();
-                department.setId(result.getInt("department_id"));
+                department.setId(result.getInt("id"));
                 department.setName(result.getString("name"));
                 department.setDescription(result.getString("description"));
-                department.setDepartmentLeader(result.getInt("department_leader"));
                 department.setDeleted(result.getBoolean("is_deleted"));
             }
         } catch (SQLException e) {

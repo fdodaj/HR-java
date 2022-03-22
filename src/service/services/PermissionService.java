@@ -1,17 +1,16 @@
 package service.services;
 
 
-import entity.Department;
-import entity.RequestPermission;
+import entity.Permission;
 
 import java.util.List;
 
 public interface PermissionService {
-    List<RequestPermission> listPermissions();
+    List<Permission> listPermissions();
 
-    RequestPermission createPermission(RequestPermission requestPermission);
+    Permission createPermission(Permission permission);
 
-    RequestPermission getPermissionById(Integer id);
+    Permission getPermissionById(Integer id);
 
-    RequestPermission deletePermission(Integer id);
+    Permission deletePermission(Integer id);
 }

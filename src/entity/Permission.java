@@ -2,30 +2,28 @@ package entity;
 
 import java.util.Date;
 
-public class RequestPermission {
+public class Permission {
     private Integer id;
-    private Integer user;
     private Date fromDate;
     private Date toDate;
     private String reason;
     private Integer businessDays;
-    private String requestType;
-    private String requestStatus;
+    private String permissionStatus;
     private Boolean deleted;
+    private int user_id;
 
-    public RequestPermission() {
+    public Permission() {
     }
 
-    public RequestPermission(Integer id, Integer user, Date fromDate, Date toDate, String reason, Integer businessDays, String requestType, String requestStatus, Boolean deleted) {
+    public Permission(Integer id, Date fromDate, Date toDate, String reason, Integer businessDays, String requestStatus, Boolean deleted, int user_id) {
         this.id = id;
-        this.user = user;
         this.fromDate = fromDate;
         this.toDate = toDate;
         this.reason = reason;
         this.businessDays = businessDays;
-        this.requestType = requestType;
-        this.requestStatus = requestStatus;
+        this.permissionStatus = requestStatus;
         this.deleted = deleted;
+        this.user_id = user_id;
     }
 
     public Integer getId() {
@@ -34,14 +32,6 @@ public class RequestPermission {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public Integer getUser() {
-        return user;
-    }
-
-    public void setUser(Integer user) {
-        this.user = user;
     }
 
     public Date getFromDate() {
@@ -76,20 +66,12 @@ public class RequestPermission {
         this.businessDays = businessDays;
     }
 
-    public String getRequestType() {
-        return requestType;
+    public String getPermissionStatus() {
+        return permissionStatus;
     }
 
-    public void setRequestType(String requestType) {
-        this.requestType = requestType;
-    }
-
-    public String getRequestStatus() {
-        return requestStatus;
-    }
-
-    public void setRequestStatus(String requestStatus) {
-        this.requestStatus = requestStatus;
+    public void setPermissionStatus(String permissionStatus) {
+        this.permissionStatus = permissionStatus;
     }
 
     public Boolean getDeleted() {
@@ -100,18 +82,25 @@ public class RequestPermission {
         this.deleted = deleted;
     }
 
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
+    }
+
     @Override
     public String toString() {
-        return "request_permission{" +
+        return "Permission{" +
                 "id=" + id +
-                ", user=" + user +
-                ", from_date=" + fromDate +
-                ", to_date=" + toDate +
+                ", fromDate=" + fromDate +
+                ", toDate=" + toDate +
                 ", reason='" + reason + '\'' +
-                ", business_days=" + businessDays +
-                ", request_type='" + requestType + '\'' +
-                ", request_status='" + requestStatus + '\'' +
-                ", is_deleted=" + deleted +
+                ", businessDays=" + businessDays +
+                ", requestStatus='" + permissionStatus + '\'' +
+                ", deleted=" + deleted +
+                ", user_id=" + user_id +
                 '}';
     }
 }

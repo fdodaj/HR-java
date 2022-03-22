@@ -8,18 +8,8 @@ public class Role{
     private String name;
     private String description;
     private Boolean deleted;
-    private User user;
 
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    private List<User> users;
-
-
-    public Role() {
-    }
+    public Role() {}
 
     public Role(Integer id, String name, String description, Boolean deleted) {
         this.id = id;
@@ -62,11 +52,11 @@ public class Role{
 
     @Override
     public String toString() {
-        return "role{" +
+        return "Role{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", is_deleted=" + deleted +
+                ", deleted=" + deleted +
                 '}';
     }
 }

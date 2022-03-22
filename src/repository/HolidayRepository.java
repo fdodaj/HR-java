@@ -18,8 +18,9 @@ public class HolidayRepository {
             statement.setInt(1, holiday.getId());
             statement.setString(2, holiday.getName());
             statement.setString(3, holiday.getDescription());
-            statement.setBoolean(4, holiday.getActive());
-            statement.setBoolean(5, holiday.getDeleted());
+            statement.setDate(4, (Date) holiday.getDate());
+            statement.setBoolean(5, holiday.getActive());
+            statement.setBoolean(6, holiday.getDeleted());
             statement.executeUpdate();
 
         } catch (SQLException e) {
@@ -37,9 +38,10 @@ public class HolidayRepository {
 
             if (result.next()) {
                 holiday = new Holiday();
-                holiday.setId(result.getInt("holiday_id"));
+                holiday.setId(result.getInt("id"));
                 holiday.setName(result.getString("name"));
                 holiday.setDescription(result.getString("description"));
+                holiday.setDate(result.getDate("date"));
                 holiday.setActive(result.getBoolean("is_active"));
                 holiday.setDeleted(result.getBoolean("is_deleted"));
             }
@@ -57,9 +59,10 @@ public class HolidayRepository {
 
             while (result.next()) {
                 holiday = new Holiday();
-                holiday.setId(result.getInt("holiday_id"));
+                holiday.setId(result.getInt("id"));
                 holiday.setName(result.getString("name"));
                 holiday.setDescription(result.getString("description"));
+                holiday.setDate(result.getDate("date"));
                 holiday.setActive(result.getBoolean("is_active"));
                 holiday.setDeleted(result.getBoolean("is_deleted"));
                 holidays.add(holiday);

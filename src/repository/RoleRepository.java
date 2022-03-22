@@ -1,8 +1,6 @@
 package repository;
 
-import entity.RequestPermission;
 import entity.Role;
-import entity.User;
 import util.DatabaseConnection;
 
 import java.sql.*;
@@ -41,7 +39,7 @@ public class RoleRepository {
 
             while (result.next()) {
                 role = new Role();
-                role.setId(result.getInt("role_id"));
+                role.setId(result.getInt("id"));
                 role.setName(result.getString("name"));
                 role.setDescription(result.getString("description"));
                 role.setDeleted(result.getBoolean("is_deleted"));

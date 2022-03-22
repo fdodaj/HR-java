@@ -12,7 +12,7 @@ public final class UserQueries {
 
     public static final String GET_ALL_HOLIDAY  = "SELECT * FROM holiday";
     public static final String GET_HOLIDAY_BY_ID = "SELECT * FROM holiday WHERE id = ?";
-    public static final String ADD_HOLIDAY = "INSERT INTO holiday(`id`,`name`, `description`, `is_active`, `is_deleted`) VALUES (?, ?, ?, ?, ?)";
+    public static final String ADD_HOLIDAY = "INSERT INTO holiday(`id`,`name`, `description`,`date`, `is_active`, `is_deleted`) VALUES (?, ?, ?, ?, ?, ?)";
     public static final String DELETE_HOLIDAY = "UPDATE holiday SET is_deleted = true where id  = ?";
 
     public static final String GET_ALL_DEPARTMENTS = "SELECT * FROM department";
@@ -21,10 +21,10 @@ public final class UserQueries {
     public static final String DELETE_DEPARTMENT = "UPDATE department SET is_deleted = true where id = ?";
 
 
-    public static final String GET_ALL_PERMISSIONS = "SELECT * FROM request_permission";
-    public static final String GET_PERMISSION_BY_ID = "SELECT * FROM request_permission where id = ?";
-    public static final String CREATE_PERMISSION = "INSERT INTO request_permission(`id`, `user`, `from_date`, `to_date`, `reason`, `business_days`, `request_type`, `request_status`, `is_deleted`) VALUES(?, ?, ?, ?, ?,?, ?, ?, ?)";
-    public static final String DELETE_PERMISSION = "UPDATE request_permission SET is_deleted = true where id = ?";
+    public static final String GET_ALL_PERMISSIONS = "SELECT * FROM permission";
+    public static final String GET_PERMISSION_BY_ID = "SELECT * FROM permission where id = ?";
+    public static final String CREATE_PERMISSION = "INSERT INTO permission(`id`, `user`, `from_date`, `to_date`, `reason`, `business_days`, `request_type`, `request_status`, `is_deleted`) VALUES(?, ?, ?, ?, ?,?, ?, ?, ?)";
+    public static final String DELETE_PERMISSION = "UPDATE permission SET is_deleted = true where id = ?";
 
     public static final String GET_ALL_ROLES = "SELECT * FROM role";
     public static final String ADD_ROLE = "INSERT INTO role(`id`, `name`, `description`, `is_deleted`) VALUES (?, ?, ?, ?)";

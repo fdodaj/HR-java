@@ -1,21 +1,26 @@
 package entity;
 
+import java.util.Date;
+
 public class Holiday {
     private Integer id;
     private String name;
     private String description;
+    private Date date;
     private Boolean active;
     private  Boolean deleted;
 
     public Holiday() {
     }
 
-    public Holiday(Integer id, String name, String description, Boolean active, Boolean deleted) {
+
+    public Holiday(Integer id, String name, String description, Date date, Boolean active, Boolean deleted) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.active = active;
         this.deleted = deleted;
+        this.date = date;
     }
 
     public Integer getId() {
@@ -32,6 +37,13 @@ public class Holiday {
 
     public void setName(String name) {
         this.name = name;
+    }
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public String getDescription() {
@@ -66,6 +78,7 @@ public class Holiday {
                 ", description='" + description + '\'' +
                 ", is_active=" + active +
                 ", is_deleted=" + deleted +
+                ", date=" + date +
                 '}';
     }
 }

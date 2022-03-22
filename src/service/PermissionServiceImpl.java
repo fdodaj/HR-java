@@ -1,6 +1,6 @@
 package service;
 
-import entity.RequestPermission;
+import entity.Permission;
 import repository.PermissionsRepository;
 import service.services.PermissionService;
 
@@ -9,22 +9,22 @@ import java.util.List;
 public class PermissionServiceImpl implements PermissionService {
     PermissionsRepository permissionsRepository = new PermissionsRepository();
     @Override
-    public List<RequestPermission> listPermissions() {
+    public List<Permission> listPermissions() {
         return permissionsRepository.listPermissions();
     }
 
     @Override
-    public RequestPermission createPermission(RequestPermission requestPermission) {
+    public Permission createPermission(Permission requestPermission) {
         return permissionsRepository.createPermission(requestPermission);
     }
 
     @Override
-    public RequestPermission getPermissionById(Integer id) {
+    public Permission getPermissionById(Integer id) {
         return permissionsRepository.getPermissionById(id);
     }
 
     @Override
-    public RequestPermission deletePermission(Integer id) {
+    public Permission deletePermission(Integer id) {
         return permissionsRepository.delete(id);
     }
 }
