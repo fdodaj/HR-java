@@ -66,7 +66,7 @@ public class UserRepository {
                 auth.setId(result.getInt(1));
                 auth.setEmail(result.getString(2));
                 auth.setPassword(result.getString(3));
-                auth.setRole(result.getString(4));
+                auth.setRole(result.getInt(4));
                 auth.setFirstName(result.getString(5));
             }
         } catch (SQLException e) {

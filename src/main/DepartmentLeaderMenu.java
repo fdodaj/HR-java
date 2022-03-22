@@ -26,7 +26,7 @@ public class DepartmentLeaderMenu {
             switch (menuItem) {
                 case 1:
 
-                    String role = auth.getRole();;
+                    int role = auth.getRole();;
 
 //                    System.out.println(user.toString());
                     break;

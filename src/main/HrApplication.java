@@ -12,6 +12,7 @@ public class HrApplication {
 
     public final static Scanner SCANNER = new Scanner(System.in);
 
+    public static String exit = "N";
 
     public static AuthenticatedUser auth;
 
@@ -21,11 +22,10 @@ public class HrApplication {
 
         auth = authenticateUser();
 
-        RoleEnum role = RoleEnum.valueOf(auth.getRole());
+        RoleEnum role = RoleEnum.getById(auth.getRole());
 
-     do{
-        try{
-            switch (role) {
+        do {
+            switch (Objects.requireNonNull(role)) {
                 case HR:
                     // HR menu
 
@@ -37,10 +37,7 @@ public class HrApplication {
                 case EMPLOYEE:
                     // TODO employee menu
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-     }while (true);
+        } while ("Y".equalsIgnoreCase(exit));
 
     }
 
@@ -53,12 +50,11 @@ public class HrApplication {
         AuthenticatedUser auth = null;
         if (!email.isEmpty() && !password.isEmpty()) {
             UserServiceImpl userService = new UserServiceImpl();
-             auth = userService.loginUser(email, password);
+            auth = userService.loginUser(email, password);
         }
-        if(Objects.isNull(auth)) throw new HrAuthException("Nuk mund te aksesosh sistemin");
+        if (Objects.isNull(auth)) throw new HrAuthException("Nuk mund te aksesosh sistemin");
         return auth;
     }
-
 
 
 }

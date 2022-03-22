@@ -7,7 +7,7 @@ public class AuthenticatedUser {
     private String firstName;
     private String email;
     private String password;
-    private String role;
+    private int role;
 
 
 
@@ -48,11 +48,11 @@ public class AuthenticatedUser {
     }
 
 
-    public String getRole() {
+    public int getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(int role) {
         this.role = role;
     }
 
