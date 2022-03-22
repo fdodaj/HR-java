@@ -2,7 +2,10 @@ package service.services;
 
 import entity.AuthenticatedUser;
 import entity.User;
+import model.MinimalUserDTO;
+import model.UserDTO;
 
+import java.sql.SQLException;
 import java.util.List;
 
 
@@ -18,6 +21,10 @@ public interface UserService {
     AuthenticatedUser loginUser(String email, String password);
 
     List<User> listUsers();
+
+    MinimalUserDTO getMinimalData(Integer id);
+
+    UserDTO getUserPerm(Integer id);
 
 
 }

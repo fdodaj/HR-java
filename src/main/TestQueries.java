@@ -21,5 +21,8 @@ public class TestQueries {
 //        System.out.println(departmentService.listDepartments().toString());
 //        System.out.println(roleService.listRoles().toString());
 //        System.out.println(permissionService.listPermissions().toString());
+
+//        System.out.println(userService.getMinimalData(3));
+        System.out.println(userService.getUserPerm(1));
     }
 }

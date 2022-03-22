@@ -2,6 +2,9 @@ package repository;
 
 import entity.AuthenticatedUser;
 import entity.User;
+import model.MinimalUserDTO;
+import model.PermissionDTO;
+import model.UserDTO;
 import util.DatabaseConnection;
 
 import java.sql.*;
@@ -131,4 +134,65 @@ public class UserRepository {
         }
         return users;
     }
+
+    public MinimalUserDTO getMinimalData(Integer id) {
+        MinimalUserDTO minimalUserDTO = null;
+        try (PreparedStatement statement = connection.prepareStatement(GET_MINIMAL_DATA_BY_ID)) {
+            statement.setInt(1, id);
+            ResultSet result = statement.executeQuery();
+            if (result.next()) {
+                minimalUserDTO = new MinimalUserDTO();
+                minimalUserDTO.setFirstName(result.getString("first_name"));
+                minimalUserDTO.setLastName(result.getString("last_name"));
+                minimalUserDTO.setEmail(result.getString("email"));
+                minimalUserDTO.setRole(result.getString("role_name"));
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+
+        return minimalUserDTO;
+
+    }
+
+    public UserDTO getUserPermissions(Integer id) {
+        UserDTO userDTO = new UserDTO();
+
+        try {
+            PreparedStatement statement = connection.prepareStatement(GET_MINIMAL_DATA_BY_ID);
+            statement.setInt(1, id);
+            ResultSet result = statement.executeQuery();
+            if(result.next()) {
+                userDTO.setFirstName(result.getString("first_name"));
+                userDTO.setLastName(result.getString("last_name"));
+                userDTO.setEmail(result.getString("email"));
+                userDTO.setRole(result.getString("role_name"));
+            }
+
+
+            statement = connection.prepareStatement("select p.*  from user u left join permission p on u.id = p.user_id where u.id = ?");
+            statement.setInt(1, id);
+            result = statement.executeQuery();
+
+            List<PermissionDTO> permissionDTOS = new ArrayList<>();
+            while (result.next()) {
+                PermissionDTO permissionDTO = new PermissionDTO();
+                permissionDTO.setFromDate(result.getDate("from_date"));
+                permissionDTO.setToDate(result.getDate("to_date"));
+                permissionDTO.setPermissionStatus(result.getString("permission_status"));
+                permissionDTO.setReason(result.getString("reason"));
+                permissionDTOS.add(permissionDTO);
+            }
+
+            userDTO.setPermissions(permissionDTOS);
+        } catch (SQLException e) {
+            e.getStackTrace();
+        }
+        return userDTO;
+
+
+
+    }
+
+
 }

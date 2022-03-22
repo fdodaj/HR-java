@@ -8,6 +8,8 @@ public final class UserQueries {
     public static final String ADD_USER = "INSERT INTO user(`id`,`first_name`,`last_name`,`email`,`password`,`phone_number`,`birthday`,`address`,`gender`,`hire_date`,`paid_time_off`,`is_deleted`,`role`) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     public static final String DELETE_USER = "UPDATE user SET is_deleted = true where id  = ?";
     public static final String GET_ALL_USERS = "SELECT * FROM user";
+    public static final String GET_MINIMAL_DATA = "select u.last_name, u.first_name, u.email, r.id, r.name  from user u left join role r on u.role_id = r.id";
+    public static final String GET_MINIMAL_DATA_BY_ID = "select u.last_name, u.first_name, u.email, r.name as role_name  from user u left join role r on u.role_id = r.id where u.id = ?";
 
 
     public static final String GET_ALL_HOLIDAY  = "SELECT * FROM holiday";

@@ -2,9 +2,12 @@ package service;
 
 import entity.AuthenticatedUser;
 import entity.User;
+import model.MinimalUserDTO;
+import model.UserDTO;
 import repository.UserRepository;
 import service.services.UserService;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
@@ -43,5 +46,12 @@ public class UserServiceImpl implements UserService {
         return userRepository.listUsers();
     }
 
+    @Override
+    public MinimalUserDTO getMinimalData(Integer id) {
+        return userRepository.getMinimalData(id);
+    }
 
+    public UserDTO getUserPerm(Integer id){
+        return userRepository.getUserPermissions(id);
+    }
 }
