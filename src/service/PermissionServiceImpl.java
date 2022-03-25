@@ -27,4 +27,14 @@ public class PermissionServiceImpl implements PermissionService {
     public Permission deletePermission(Integer id) {
         return permissionsRepository.delete(id);
     }
+
+    @Override
+    public Permission approvePermission(Integer id) {
+        return permissionsRepository.approve(id);
+    }
+
+    @Override
+    public Permission rejectPermission(Integer id) {
+        return permissionsRepository.reject(id);
+    }
 }

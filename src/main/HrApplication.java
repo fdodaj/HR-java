@@ -4,6 +4,7 @@ import entity.AuthenticatedUser;
 import service.HrAuthException;
 import service.UserServiceImpl;
 
+import java.text.ParseException;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -16,26 +17,25 @@ public class HrApplication {
 
     public static AuthenticatedUser auth;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
 
         System.out.println("Welcome to HR system");
 
         auth = authenticateUser();
 
-        RoleEnum role = RoleEnum.getById(auth.getRole());
+        RoleEnum role = RoleEnum.getById(auth.getRoleId());
 
         do {
             switch (Objects.requireNonNull(role)) {
                 case HR:
-                    // HR menu
+                    HrMenu.menu();
 
                 case ADMIN:
-                    // ADMIN menu
-
+                    AdminMenu.menu();
                 case PD:
                     DepartmentLeaderMenu.menu();
                 case EMPLOYEE:
-                    // TODO employee menu
+                    EmployeeMenu.menu();
             }
         } while ("Y".equalsIgnoreCase(exit));
 

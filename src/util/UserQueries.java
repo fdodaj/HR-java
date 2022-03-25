@@ -3,7 +3,7 @@ package util;
 public final class UserQueries {
     private UserQueries() {}
 
-    public static final String LOGIN_USER = "SELECT  id, email, password, role , first_name FROM user WHERE email = ? AND password = ?";
+    public static final String LOGIN_USER = "SELECT  id, email, password, role_id, first_name,  department_id  FROM user WHERE email = ? AND password = ?";
     public static final String GET_INFO = "SELECT * FROM user WHERE id = ?";
     public static final String ADD_USER = "INSERT INTO user(`id`,`first_name`,`last_name`,`email`,`password`,`phone_number`,`birthday`,`address`,`gender`,`hire_date`,`paid_time_off`,`is_deleted`,`role`) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     public static final String DELETE_USER = "UPDATE user SET is_deleted = true where id  = ?";
@@ -25,8 +25,11 @@ public final class UserQueries {
 
     public static final String GET_ALL_PERMISSIONS = "SELECT * FROM permission";
     public static final String GET_PERMISSION_BY_ID = "SELECT * FROM permission where id = ?";
-    public static final String CREATE_PERMISSION = "INSERT INTO permission(`id`, `user`, `from_date`, `to_date`, `reason`, `business_days`, `request_type`, `request_status`, `is_deleted`) VALUES(?, ?, ?, ?, ?,?, ?, ?, ?)";
+    public static final String CREATE_PERMISSION = "INSERT INTO permission(`id`,`from_date`, `to_date`, `reason`, `business_days`, `permission_status`, `is_deleted`, `user_id`) VALUES(?, ?, ?,?, ?, ?, ?,?)";
     public static final String DELETE_PERMISSION = "UPDATE permission SET is_deleted = true where id = ?";
+    public static final String APPROVE_PERMISSION = "UPDATE permission SET permission_status = 'Approved'  where id  = ?";
+    public static final String REJECT_PERMISSION = "UPDATE permission SET permission_status = 'Rejected'  where id  = ?";
+
 
     public static final String GET_ALL_ROLES = "SELECT * FROM role";
     public static final String ADD_ROLE = "INSERT INTO role(`id`, `name`, `description`, `is_deleted`) VALUES (?, ?, ?, ?)";

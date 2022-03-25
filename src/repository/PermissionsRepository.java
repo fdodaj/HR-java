@@ -17,8 +17,8 @@ public class PermissionsRepository {
         try (PreparedStatement statement = connection.prepareStatement(CREATE_PERMISSION)) {
             Permission Permission = new Permission();
             statement.setInt(1, permission.getId());
-            statement.setDate(2, (Date) permission.getFromDate());
-            statement.setDate(3, (Date) permission.getToDate());
+            statement.setDate(2, permission.getFromDate());
+            statement.setDate(3, permission.getToDate());
             statement.setString(4, permission.getReason());
             statement.setInt(5, permission.getBusinessDays());
             statement.setString(6, permission.getPermissionStatus());
@@ -86,6 +86,31 @@ public class PermissionsRepository {
                 permission.setDeleted(result.getBoolean("is_deleted"));
                 permission.setUser_id(result.getInt("user_id"));
             }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        return permission;
+    }
+    public Permission approve(Integer id) {
+        Permission permission = null;
+        try (PreparedStatement statement = connection.prepareStatement(APPROVE_PERMISSION)){
+
+            statement.setInt(1, id);
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        return permission;
+    }
+
+    public Permission reject(Integer id) {
+        Permission permission = null;
+        try (PreparedStatement statement = connection.prepareStatement(REJECT_PERMISSION)){
+
+            statement.setInt(1, id);
+            statement.executeUpdate();
+
         } catch (SQLException e) {
             System.err.println(e.getMessage());
         }

@@ -5,6 +5,7 @@ import entity.User;
 import model.MinimalUserDTO;
 import model.PermissionDTO;
 import model.UserDTO;
+import model.UserDepartmentDTO;
 import util.DatabaseConnection;
 
 import java.sql.*;
@@ -69,8 +70,9 @@ public class UserRepository {
                 auth.setId(result.getInt(1));
                 auth.setEmail(result.getString(2));
                 auth.setPassword(result.getString(3));
-                auth.setRole(result.getInt(4));
+                auth.setRoleId(result.getInt(4));
                 auth.setFirstName(result.getString(5));
+                auth.setDepartmentId(result.getInt(6));
             }
         } catch (SQLException e) {
             System.err.println(e.getMessage());
@@ -155,6 +157,27 @@ public class UserRepository {
 
     }
 
+    public List<UserDepartmentDTO> getUsersByDepartment(Integer id){
+        List<UserDepartmentDTO> userDepartmentDTOS = new ArrayList<>();
+
+        try (PreparedStatement statement = connection.prepareStatement("select u.last_name, u.first_name, u.email, r.name as department_name  from user u left join department r on u.department_id = r.id where r.id = ?")) {
+            statement.setInt(1, id);
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                UserDepartmentDTO userDepartmentDTO = new UserDepartmentDTO();
+                userDepartmentDTO.setFirstName(result.getString("first_name"));
+                userDepartmentDTO.setLastName(result.getString("last_name"));
+                userDepartmentDTO.setEmail(result.getString("email"));
+                userDepartmentDTO.setDepartment(result.getString("department_name"));
+                userDepartmentDTOS.add(userDepartmentDTO);
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+
+        return userDepartmentDTOS;
+    }
+
     public UserDTO getUserPermissions(Integer id) {
         UserDTO userDTO = new UserDTO();
 
@@ -189,10 +212,6 @@ public class UserRepository {
             e.getStackTrace();
         }
         return userDTO;
-
-
-
     }
-
 
 }

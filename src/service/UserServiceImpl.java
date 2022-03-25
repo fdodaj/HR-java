@@ -4,6 +4,7 @@ import entity.AuthenticatedUser;
 import entity.User;
 import model.MinimalUserDTO;
 import model.UserDTO;
+import model.UserDepartmentDTO;
 import repository.UserRepository;
 import service.services.UserService;
 
@@ -53,5 +54,9 @@ public class UserServiceImpl implements UserService {
 
     public UserDTO getUserPerm(Integer id){
         return userRepository.getUserPermissions(id);
+    }
+
+    public List<UserDepartmentDTO> getUserByDepartment(Integer id){
+        return userRepository.getUsersByDepartment(id);
     }
 }

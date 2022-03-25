@@ -13,4 +13,8 @@ public interface PermissionService {
     Permission getPermissionById(Integer id);
 
     Permission deletePermission(Integer id);
+
+    Permission approvePermission(Integer id);
+
+    Permission rejectPermission(Integer id);
 }

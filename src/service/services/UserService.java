@@ -4,6 +4,7 @@ import entity.AuthenticatedUser;
 import entity.User;
 import model.MinimalUserDTO;
 import model.UserDTO;
+import model.UserDepartmentDTO;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -25,6 +26,8 @@ public interface UserService {
     MinimalUserDTO getMinimalData(Integer id);
 
     UserDTO getUserPerm(Integer id);
+
+    List<UserDepartmentDTO> getUserByDepartment(Integer id);
 
 
 }

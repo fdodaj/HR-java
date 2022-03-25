@@ -7,13 +7,35 @@ import service.services.DepartmentService;
 import service.services.PermissionService;
 import service.services.RoleService;
 
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class TestQueries {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
         UserServiceImpl userService = new UserServiceImpl();
         HolidayServicesImpl holidayService = new HolidayServicesImpl();
         DepartmentService departmentService = new DepartmentServiceImpl();
         RoleService roleService = new RoleServiceImpl();
         PermissionService permissionService = new PermissionServiceImpl();
+
+
+        Permission permission = new Permission();
+        System.out.println("Enter starting date");
+        permission.setId(4);
+        permission.setFromDate(java.sql.Date.valueOf("2013-09-04"));
+        permission.setToDate(java.sql.Date.valueOf("2013-09-04"));
+        permission.setReason("hiking");
+        permission.setBusinessDays(2);
+        permission.setPermissionStatus("Pending");
+        permission.setDeleted(false);
+        permission.setUser_id(1);
+        permissionService.createPermission(permission);
+
+//        permissionService.createPermission(permission);
+
 
 
 //        System.out.println(userService.listUsers().toString());
@@ -23,6 +45,9 @@ public class TestQueries {
 //        System.out.println(permissionService.listPermissions().toString());
 
 //        System.out.println(userService.getMinimalData(3));
-        System.out.println(userService.getUserPerm(1));
-    }
+//        System.out.println(userService.getUserPerm(1));
+//        permissionService.approvePermission(3);
+//        System.out.println(userService.getUserByDepartment(4));
+            }
+
 }

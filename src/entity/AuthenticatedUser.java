@@ -1,15 +1,20 @@
 package entity;
 
-import java.util.Date;
-
 public class AuthenticatedUser {
     private Integer id;
     private String firstName;
     private String email;
     private String password;
-    private int role;
+    private int roleId;
+    private int departmentId;
 
+    public int getDepartmentId() {
+        return departmentId;
+    }
 
+    public void setDepartmentId(int departmentId) {
+        this.departmentId = departmentId;
+    }
 
     public AuthenticatedUser() {
     }
@@ -48,12 +53,12 @@ public class AuthenticatedUser {
     }
 
 
-    public int getRole() {
-        return role;
+    public int getRoleId() {
+        return roleId;
     }
 
-    public void setRole(int role) {
-        this.role = role;
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
     }
 
     @Override
@@ -62,7 +67,7 @@ public class AuthenticatedUser {
                 "id=" + id +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", role=" + role +
+                ", role=" + roleId +
                 '}';
     }
 }
