@@ -1,5 +1,9 @@
 package repository;
 import entity.Department;
+import entity.Permission;
+import model.PermissionDTO;
+import model.UserDTO;
+import model.UserDepartmentDTO;
 import util.DatabaseConnection;
 
 import java.sql.*;
@@ -74,6 +78,32 @@ public class DepartmentRepository {
                 department.setName(result.getString("name"));
                 department.setDescription(result.getString("description"));
                 department.setDeleted(result.getBoolean("is_deleted"));
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        return department;
+    }
+
+    public boolean deletePermanentDepartment(Integer id) {
+        Department department = null;
+        try (PreparedStatement statement = connection.prepareStatement(DELETE_PERMANENT_DEPARTMENT)) {
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        return true;
+    }
+
+    public Department getDepartmentName(Integer id) {
+        Department department = null;
+        try (PreparedStatement statement = connection.prepareStatement("SELECT name FROM department where id=?")) {
+            statement.setInt(1, id);
+            ResultSet result = statement.executeQuery();
+            if (result.next()) {
+                department = new Department();
+                department.setName(result.getString("name"));
             }
         } catch (SQLException e) {
             System.err.println(e.getMessage());

@@ -54,9 +54,9 @@ CREATE TABLE `role` (
 
 # Constrains
 
-ALTER TABLE permission add CONSTRAINT `user_permission_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-ALTER TABLE user ADD   CONSTRAINT `department_user_fk` FOREIGN KEY (`department_id`) REFERENCES `department` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
-ALTER TABLE user ADD   CONSTRAINT `user_role_fk` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE permission add CONSTRAINT `user_permission_fk` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION;
+ALTER TABLE user ADD CONSTRAINT `department_user_fk` FOREIGN KEY (`department_id`) REFERENCES `department` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE user ADD CONSTRAINT `user_role_fk` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 
 # table population

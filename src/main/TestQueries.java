@@ -22,17 +22,7 @@ public class TestQueries {
         PermissionService permissionService = new PermissionServiceImpl();
 
 
-        Permission permission = new Permission();
-        System.out.println("Enter starting date");
-        permission.setId(4);
-        permission.setFromDate(java.sql.Date.valueOf("2013-09-04"));
-        permission.setToDate(java.sql.Date.valueOf("2013-09-04"));
-        permission.setReason("hiking");
-        permission.setBusinessDays(2);
-        permission.setPermissionStatus("Pending");
-        permission.setDeleted(false);
-        permission.setUser_id(1);
-        permissionService.createPermission(permission);
+
 
 //        permissionService.createPermission(permission);
 
@@ -48,6 +38,9 @@ public class TestQueries {
 //        System.out.println(userService.getUserPerm(1));
 //        permissionService.approvePermission(3);
 //        System.out.println(userService.getUserByDepartment(4));
-            }
+
+
+        System.out.println(permissionService.getPermissionsByDepartment(2));
+    }
 
 }

@@ -1,11 +1,14 @@
 package main;
 import entity.Permission;
+import service.DepartmentServiceImpl;
 import service.PermissionServiceImpl;
 import service.UserServiceImpl;
 
 import java.sql.Date;
 import java.util.Scanner;
 import static main.HrApplication.auth;
+
+import service.services.DepartmentService;
 import service.services.PermissionService;
 
 public class DepartmentLeaderMenu {
@@ -14,6 +17,7 @@ public class DepartmentLeaderMenu {
 
     public static void menu(){
         PermissionService permissionService = new PermissionServiceImpl();
+        DepartmentService departmentService = new DepartmentServiceImpl();
         UserServiceImpl userService = new UserServiceImpl();
 
         System.out.println("---------------Department leader menu---------------");
@@ -31,10 +35,12 @@ public class DepartmentLeaderMenu {
                 case 1:
                     System.out.println(userService.getUserById(auth.getId()));
                 case 2:
-                    System.out.println("View all employees of your department");
+                    System.out.println("All users of " + departmentService.getDepartmentName(auth.getDepartmentId()).printName() + " department");
+                    System.out.println(userService.getUserByDepartment(auth.getDepartmentId()));
                     break;
                 case 3:
-                    System.out.println("View all requests of your employees");
+                    System.out.println("All permissions of " + departmentService.getDepartmentName(auth.getDepartmentId()).printName() + " employees");
+                    System.out.println(permissionService.getPermissionsByDepartment(auth.getDepartmentId()));
                     break;
                 case 4:
                     System.out.println("Enter the permission id you want to Approve");

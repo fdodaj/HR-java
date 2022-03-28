@@ -37,7 +37,7 @@ public final class EmployeeMenu {
                     PermissionService permissionService = new PermissionServiceImpl();
 
                     Permission permission = new Permission();
-                    permission.setId(5);
+//                    permission.setId(6);
                     System.out.println("Enter starting date(YYYY-MM-DD)");
                     String startDate = SCANNER.nextLine();
                     permission.setFromDate(java.sql.Date.valueOf(startDate));

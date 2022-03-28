@@ -2,6 +2,7 @@ package service.services;
 
 
 import entity.Permission;
+import model.DepartmentPermissionsDTO;
 
 import java.util.List;
 
@@ -17,4 +18,8 @@ public interface PermissionService {
     Permission approvePermission(Integer id);
 
     Permission rejectPermission(Integer id);
+
+    List<DepartmentPermissionsDTO> getPermissionsByDepartment(Integer id);
+
+
 }

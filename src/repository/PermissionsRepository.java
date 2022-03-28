@@ -1,6 +1,9 @@
 package repository;
 
+import entity.Department;
 import entity.Permission;
+import model.DepartmentPermissionsDTO;
+import model.PermissionDTO;
 import util.DatabaseConnection;
 
 import java.sql.*;
@@ -16,14 +19,13 @@ public class PermissionsRepository {
 
         try (PreparedStatement statement = connection.prepareStatement(CREATE_PERMISSION)) {
             Permission Permission = new Permission();
-            statement.setInt(1, permission.getId());
-            statement.setDate(2, permission.getFromDate());
-            statement.setDate(3, permission.getToDate());
-            statement.setString(4, permission.getReason());
-            statement.setInt(5, permission.getBusinessDays());
-            statement.setString(6, permission.getPermissionStatus());
-            statement.setBoolean(7, permission.getDeleted());
-            statement.setInt(8, permission.getUser_id());
+            statement.setDate(1, permission.getFromDate());
+            statement.setDate(2, permission.getToDate());
+            statement.setString(3, permission.getReason());
+            statement.setInt(4, permission.getBusinessDays());
+            statement.setString(5, permission.getPermissionStatus());
+            statement.setBoolean(6, permission.getDeleted());
+            statement.setInt(7, permission.getUser_id());
             statement.executeUpdate();
 
         } catch (SQLException e) {
@@ -116,4 +118,30 @@ public class PermissionsRepository {
         }
         return permission;
     }
+//    select u.first_name, u.last_name,u.paid_time_off, p.reason, p.from_date,p.to_date, p.permission_status from permission p  join user u on p.user_id = u.id  join department d on d.id = u.department_id where department_id=4;
+//        try (PreparedStatement statement = connection.prepareStatement("select u.first_name, u.last_name,u.paid_time_off, p.reason, p.from_date,p.to_date, p.permission_status from permission p  join user u on p.user_id = u.id  join department d on d.id = u.department_id where department_id=4")){
+public List<DepartmentPermissionsDTO> getPermissionByDepartment(Integer id) {
+    DepartmentPermissionsDTO departmentPermissionsDTO = null;
+    List<DepartmentPermissionsDTO> list = new ArrayList<>();
+
+    try (PreparedStatement statement = connection.prepareStatement("select u.first_name, u.last_name,u.paid_time_off, p.reason, p.from_date,p.to_date, p.permission_status from permission p  join user u on p.user_id = u.id  join department d on d.id = u.department_id where department_id=?")){
+         statement.setInt(1, id);
+        ResultSet result = statement.executeQuery();
+        while (result.next()) {
+            departmentPermissionsDTO = new DepartmentPermissionsDTO();
+            departmentPermissionsDTO.setFirstName(result.getString("first_name"));
+            departmentPermissionsDTO.setLastName(result.getString("last_name"));
+            departmentPermissionsDTO.setPaidTimeOff(result.getInt("paid_time_off"));
+            departmentPermissionsDTO.setReason(result.getString("reason"));
+            departmentPermissionsDTO.setFromDate(result.getDate("from_date"));
+            departmentPermissionsDTO.setToDate(result.getDate("to_date"));
+            list.add(departmentPermissionsDTO);
+        }
+    } catch (SQLException e) {
+        System.err.println(e.getMessage());
+    }
+    return list;
+}
+
+
 }

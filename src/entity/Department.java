@@ -57,4 +57,8 @@ public class Department {
                 ", is_deleted=" + deleted +
                 '}';
     }
+
+    public String printName(){
+        return name;
+    }
 }

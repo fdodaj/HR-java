@@ -1,6 +1,8 @@
 package service;
 
 import entity.Department;
+import entity.Permission;
+import model.DepartmentPermissionsDTO;
 import repository.DepartmentRepository;
 import service.services.DepartmentService;
 
@@ -27,4 +29,16 @@ public class DepartmentServiceImpl implements DepartmentService {
     public Department deleteDepartment(Integer id) {
         return departmentRepository.delete(id);
     }
+
+    @Override
+    public boolean deletePermanentDepartment(Integer id) {
+        return departmentRepository.deletePermanentDepartment(id);
+    }
+
+    @Override
+    public Department getDepartmentName(Integer id) {
+        return departmentRepository.getDepartmentName(id);
+    }
+
+
 }

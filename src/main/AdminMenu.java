@@ -1,6 +1,9 @@
 package main;
 
+import service.DepartmentServiceImpl;
 import service.UserServiceImpl;
+import service.services.DepartmentService;
+import service.services.UserService;
 
 import java.util.Scanner;
 
@@ -13,6 +16,9 @@ public class AdminMenu {
 
     private AdminMenu(){};
     public static void menu(){
+
+        UserService userService = new UserServiceImpl();
+        DepartmentService departmentService = new DepartmentServiceImpl();
 
         System.out.println("---------------Admin menu---------------");
         char exit;
@@ -28,7 +34,7 @@ public class AdminMenu {
                 case 1:
                     System.out.println("you");
                 case 2:
-                    System.out.println("CRUD employees");
+                    userService.deleteUser(1);
                     break;
                 case 3:
                     System.out.println("CRUD roles");
@@ -38,6 +44,7 @@ public class AdminMenu {
                     break;
                 case 5:
                     System.out.println("CRUD departments");
+//                    departmentService.deleteDepartment(2);
                     break;
                 default:
                     System.out.println("Didn't understand that");
