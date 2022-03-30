@@ -1,13 +1,24 @@
 package service;
 
+import entity.Holiday;
 import entity.Permission;
 import entity.User;
+import main.DepartmentLeaderMenu;
+import main.EmployeeMenu;
+import main.HrApplication;
 import model.DepartmentPermissionsDTO;
 import repository.PermissionsRepository;
 import repository.UserRepository;
+import service.services.HolidayService;
 import service.services.PermissionService;
 
 
+import static main.HrApplication.auth;
+
+
+
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.List;
 
 public class PermissionServiceImpl implements PermissionService {
@@ -15,26 +26,31 @@ public class PermissionServiceImpl implements PermissionService {
     User user = new User();
     PermissionsRepository permissionsRepository = new PermissionsRepository();
     UserRepository userRepository = new UserRepository();
+
+
     @Override
     public List<Permission> listPermissions() {
         return permissionsRepository.listPermissions();
     }
 
+
     @Override
     public Permission createPermission(Permission requestPermission) {
-        Permission permission = permissionsRepository.getPermissionById(requestPermission.getId());
-         user = userRepository.getUserById(user.getId());
-        if (user.getPaidTimeOff()>permission.getBusinessDays()) {
-            System.out.println("you have no days left");
+
+        if (auth.getPto() < getBusinessDays(requestPermission.getFromDate(), requestPermission.getToDate())) {
+            System.out.println("You dont have enough PTO");
+            System.out.println("your request has " + getBusinessDays(requestPermission.getFromDate(), requestPermission.getToDate())+ " business days");
+            System.out.println("Remaining PTOs: " + auth.getPto());
+
             return null;
         }
-        else {
+        else
             return permissionsRepository.createPermission(requestPermission);
-        }
     }
 
     @Override
     public Permission getPermissionById(Integer id) {
+
         return permissionsRepository.getPermissionById(id);
     }
 
@@ -45,6 +61,10 @@ public class PermissionServiceImpl implements PermissionService {
 
     @Override
     public Permission approvePermission(Integer id) {
+
+//        int userId =  permission.getUser_id();
+////        System.out.println(id);
+
         return permissionsRepository.approve(id);
     }
 
@@ -58,5 +78,31 @@ public class PermissionServiceImpl implements PermissionService {
         return permissionsRepository.getPermissionByDepartment(id);
     }
 
+
+
+    private int getBusinessDays(LocalDate from, LocalDate to) {
+        int businessDays = 0;
+        for (LocalDate date = from; date.isBefore(to); date = date.plusDays(1)) {
+            if (!(isWeekendDay(date) || isHoliday(date))) {
+                businessDays++;
+            }
+        }
+        return businessDays;
+    }
+
+    private boolean isWeekendDay(LocalDate date) {
+        return (date.getDayOfWeek() == DayOfWeek.SATURDAY || date.getDayOfWeek() == DayOfWeek.SUNDAY);
+    }
+
+    private boolean isHoliday(LocalDate date) {
+        HolidayService holidayService = new HolidayServicesImpl();
+        int counter = 0;
+        for (Holiday holiday : holidayService.listHolidays()) {
+            if (holiday.getDate().equals(date)) {
+                counter++;
+            }
+        }
+        return counter > 0;
+    }
 
 }

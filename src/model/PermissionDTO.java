@@ -13,13 +13,6 @@ public class PermissionDTO {
         return fromDate;
     }
 
-    public void setFromDate(Date fromDate) {
-        this.fromDate = fromDate;
-    }
-
-    public Date getToDate() {
-        return toDate;
-    }
 
     public void setToDate(Date toDate) {
         this.toDate = toDate;
@@ -58,5 +51,13 @@ public class PermissionDTO {
                 ", businessDays=" + businessDays +
                 ", permissionStatus='" + permissionStatus + '\'' +
                 '}';
+    }
+
+    public void setFromDate(Date fromDate) {
+        this.fromDate = fromDate;
+    }
+
+    public Date getToDate() {
+        return toDate;
     }
 }

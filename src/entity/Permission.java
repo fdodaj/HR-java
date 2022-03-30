@@ -1,11 +1,12 @@
 package entity;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 public class Permission {
     private Integer id;
-    private Date fromDate;
-    private Date toDate;
+    private LocalDate fromDate;
+    private LocalDate toDate;
     private String reason;
     private Integer businessDays;
     private String permissionStatus;
@@ -15,7 +16,7 @@ public class Permission {
     public Permission() {
     }
 
-    public Permission(Integer id, Date fromDate, Date toDate, String reason, Integer businessDays, String requestStatus, Boolean deleted, int user_id) {
+    public Permission(Integer id, LocalDate fromDate, LocalDate toDate, String reason, Integer businessDays, String requestStatus, Boolean deleted, int user_id) {
         this.id = id;
         this.fromDate = fromDate;
         this.toDate = toDate;
@@ -34,19 +35,19 @@ public class Permission {
         this.id = id;
     }
 
-    public Date getFromDate() {
+    public LocalDate getFromDate() {
         return fromDate;
     }
 
-    public void setFromDate(Date fromDate) {
+    public void setFromDate(LocalDate fromDate) {
         this.fromDate = fromDate;
     }
 
-    public Date getToDate() {
+    public LocalDate getToDate() {
         return toDate;
     }
 
-    public void setToDate(Date toDate) {
+    public void setToDate(LocalDate toDate) {
         this.toDate = toDate;
     }
 

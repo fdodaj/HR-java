@@ -1,12 +1,13 @@
 package entity;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Holiday {
     private Integer id;
     private String name;
     private String description;
-    private Date date;
+    private LocalDate date;
     private Boolean active;
     private  Boolean deleted;
 
@@ -14,7 +15,7 @@ public class Holiday {
     }
 
 
-    public Holiday(Integer id, String name, String description, Date date, Boolean active, Boolean deleted) {
+    public Holiday(Integer id, String name, String description, LocalDate date, Boolean active, Boolean deleted) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -38,11 +39,12 @@ public class Holiday {
     public void setName(String name) {
         this.name = name;
     }
-    public Date getDate() {
+
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

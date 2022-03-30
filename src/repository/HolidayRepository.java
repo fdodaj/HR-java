@@ -18,7 +18,7 @@ public class HolidayRepository {
             statement.setInt(1, holiday.getId());
             statement.setString(2, holiday.getName());
             statement.setString(3, holiday.getDescription());
-            statement.setDate(4, (Date) holiday.getDate());
+            statement.setDate(4, Date.valueOf(holiday.getDate()));
             statement.setBoolean(5, holiday.getActive());
             statement.setBoolean(6, holiday.getDeleted());
             statement.executeUpdate();
@@ -41,7 +41,7 @@ public class HolidayRepository {
                 holiday.setId(result.getInt("id"));
                 holiday.setName(result.getString("name"));
                 holiday.setDescription(result.getString("description"));
-                holiday.setDate(result.getDate("date"));
+                holiday.setDate(result.getDate("date").toLocalDate());
                 holiday.setActive(result.getBoolean("is_active"));
                 holiday.setDeleted(result.getBoolean("is_deleted"));
             }
@@ -62,7 +62,7 @@ public class HolidayRepository {
                 holiday.setId(result.getInt("id"));
                 holiday.setName(result.getString("name"));
                 holiday.setDescription(result.getString("description"));
-                holiday.setDate(result.getDate("date"));
+                holiday.setDate(result.getDate("date").toLocalDate());
                 holiday.setActive(result.getBoolean("is_active"));
                 holiday.setDeleted(result.getBoolean("is_deleted"));
                 holidays.add(holiday);

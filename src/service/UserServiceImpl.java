@@ -52,9 +52,11 @@ public class UserServiceImpl implements UserService {
         return userRepository.getMinimalData(id);
     }
 
-    public UserDTO getUserPerm(Integer id){
+    @Override
+    public UserDTO getUserPerm(Integer id) {
         return userRepository.getUserPermissions(id);
     }
+
 
     public List<UserDepartmentDTO> getUserByDepartment(Integer id){
         return userRepository.getUsersByDepartment(id);

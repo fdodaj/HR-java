@@ -7,6 +7,7 @@ import model.PermissionDTO;
 import util.DatabaseConnection;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,8 +20,8 @@ public class PermissionsRepository {
 
         try (PreparedStatement statement = connection.prepareStatement(CREATE_PERMISSION)) {
             Permission Permission = new Permission();
-            statement.setDate(1, permission.getFromDate());
-            statement.setDate(2, permission.getToDate());
+            statement.setDate(1, Date.valueOf(permission.getFromDate()));
+            statement.setDate(2, Date.valueOf(permission.getToDate()));
             statement.setString(3, permission.getReason());
             statement.setInt(4, permission.getBusinessDays());
             statement.setString(5, permission.getPermissionStatus());
@@ -43,8 +44,8 @@ public class PermissionsRepository {
             while (result.next()) {
                 permission = new Permission();
                 permission.setId(result.getInt("id"));
-                permission.setFromDate(result.getDate("from_date"));
-                permission.setToDate(result.getDate("to_date"));
+                permission.setFromDate(result.getDate("from_date").toLocalDate());
+                permission.setToDate(result.getDate("to_date").toLocalDate());
                 permission.setReason(result.getString("reason"));
                 permission.setBusinessDays(result.getInt("business_days"));
                 permission.setPermissionStatus(result.getString("permission_status"));
@@ -80,8 +81,8 @@ public class PermissionsRepository {
             if (result.next()) {
                 permission = new Permission();
                 permission.setId(result.getInt("id"));
-                permission.setFromDate(result.getDate("from_date"));
-                permission.setToDate(result.getDate("to_date"));
+                permission.setFromDate(result.getDate("from_date").toLocalDate());
+                permission.setToDate(result.getDate("to_date").toLocalDate());
                 permission.setReason(result.getString("reason"));
                 permission.setBusinessDays(result.getInt("business_days"));
                 permission.setPermissionStatus(result.getString("permission_status"));
@@ -93,6 +94,8 @@ public class PermissionsRepository {
         }
         return permission;
     }
+
+
     public Permission approve(Integer id) {
         Permission permission = null;
         try (PreparedStatement statement = connection.prepareStatement(APPROVE_PERMISSION)){
@@ -143,5 +146,22 @@ public List<DepartmentPermissionsDTO> getPermissionByDepartment(Integer id) {
     return list;
 }
 
-
+    public Permission getUserPermission(Integer id) {
+        Permission permission = null;
+        try (PreparedStatement statement = connection.prepareStatement("SELECT p.from_date, p.to_date,p.reason, u.first_name as firstName, u.last_name as lastname from permission p left join user u on u.id = p.user_id  where p.id = ?")) {
+            statement.setInt(1, id);
+            ResultSet result = statement.executeQuery();
+            if (result.next()) {
+                permission = new Permission();
+//                permission.setId(result.getInt("id"));
+                permission.setFromDate(result.getDate("from_date").toLocalDate());
+                permission.setToDate(result.getDate("to_date").toLocalDate());
+                permission.setReason(result.getString("reason"));
+                permission.setUser_id(result.getInt("user_id"));
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        return permission;
+    }
 }

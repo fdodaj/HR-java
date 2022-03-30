@@ -7,6 +7,15 @@ public class AuthenticatedUser {
     private String password;
     private int roleId;
     private int departmentId;
+    private int pto;
+
+    public int getPto() {
+        return pto;
+    }
+
+    public void setPto(int pto) {
+        this.pto = pto;
+    }
 
     public int getDepartmentId() {
         return departmentId;

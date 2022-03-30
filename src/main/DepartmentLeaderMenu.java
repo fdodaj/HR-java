@@ -5,14 +5,16 @@ import service.PermissionServiceImpl;
 import service.UserServiceImpl;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Scanner;
+
+import static main.HrApplication.SCANNER;
 import static main.HrApplication.auth;
 
 import service.services.DepartmentService;
 import service.services.PermissionService;
 
 public class DepartmentLeaderMenu {
-    public static final Scanner SCANNER = new Scanner(System.in);
     private DepartmentLeaderMenu(){};
 
     public static void menu(){
@@ -53,13 +55,12 @@ public class DepartmentLeaderMenu {
                     permissionService.rejectPermission(Id);
                 case 6:
                     Permission permission = new Permission();
-                    permission.setId(5);
                     System.out.println("Enter starting date(YYYY-MM-DD)");
                     String startDate = SCANNER.nextLine();
-                    permission.setFromDate(java.sql.Date.valueOf(startDate));
+                    permission.setFromDate(LocalDate.parse(startDate));
                     System.out.println("Enter ending date(YYYY-MM-DD)");
                     String endDate = SCANNER.nextLine();
-                    permission.setToDate(java.sql.Date.valueOf(endDate));
+                    permission.setToDate(LocalDate.parse(endDate));
                     System.out.println("Why are you taking this permission");
                     String reason = SCANNER.nextLine();
                     permission.setReason(reason);
@@ -69,6 +70,7 @@ public class DepartmentLeaderMenu {
                     int userId = auth.getId();
                     permission.setUser_id(userId);
                     permissionService.createPermission(permission);
+
                     break;
                 default:
                     System.out.println("Didn't understand that");

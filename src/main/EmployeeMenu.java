@@ -2,6 +2,7 @@ package main;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -11,6 +12,7 @@ import static main.HrApplication.auth;
 import entity.Permission;
 import service.PermissionServiceImpl;
 import service.UserServiceImpl;
+
 import service.services.PermissionService;
 
 public final class EmployeeMenu {
@@ -22,6 +24,7 @@ public final class EmployeeMenu {
         UserServiceImpl userService = new UserServiceImpl();
         System.out.println("---------------Employee menu---------------");
         char exit;
+
         do {
             System.out.println("Press 1 to view your details");
             System.out.println("Press 2 to make a request");
@@ -37,13 +40,14 @@ public final class EmployeeMenu {
                     PermissionService permissionService = new PermissionServiceImpl();
 
                     Permission permission = new Permission();
-//                    permission.setId(6);
                     System.out.println("Enter starting date(YYYY-MM-DD)");
                     String startDate = SCANNER.nextLine();
-                    permission.setFromDate(java.sql.Date.valueOf(startDate));
+                    permission.setFromDate(LocalDate.parse(startDate));
+
                     System.out.println("Enter ending date(YYYY-MM-DD)");
                     String endDate = SCANNER.nextLine();
-                    permission.setToDate(java.sql.Date.valueOf(endDate));
+                    permission.setToDate(LocalDate.parse(endDate));
+
                     System.out.println("Why are you taking this permission");
                     String reason = SCANNER.nextLine();
                     permission.setReason(reason);
@@ -71,4 +75,5 @@ public final class EmployeeMenu {
             exit = sc.nextLine().charAt(0);
         } while (exit != 'Q');
     }
+
 }

@@ -4,6 +4,7 @@ package service.services;
 import entity.Permission;
 import model.DepartmentPermissionsDTO;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface PermissionService {
@@ -20,6 +21,4 @@ public interface PermissionService {
     Permission rejectPermission(Integer id);
 
     List<DepartmentPermissionsDTO> getPermissionsByDepartment(Integer id);
-
-
 }
