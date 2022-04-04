@@ -28,6 +28,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserById(Integer id) {
+        if (userRepository.getUserById(id).getDeleted())
+            return null;
+        else
         return  userRepository.getUserById(id);
     }
 
@@ -39,7 +42,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public AuthenticatedUser loginUser(String email, String password) {
-       return userRepository.authenticate(email, password);
+
+        try {
+            if (userRepository.getUserByEmail(email).getDeleted()){
+                System.out.println("User is deleted");
+                return null;
+            }
+            else
+                return userRepository.authenticate(email, password);
+        }catch (Exception e){
+            return  null;
+        }
     }
 
     @Override
@@ -49,16 +62,42 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public MinimalUserDTO getMinimalData(Integer id) {
-        return userRepository.getMinimalData(id);
+        if (userRepository.getUserById(id).getDeleted() == false)
+             return userRepository.getMinimalData(id);
+        else{
+            System.out.println("The user has been deleted");
+            return null;
+        }
     }
 
     @Override
     public UserDTO getUserPerm(Integer id) {
-        return userRepository.getUserPermissions(id);
+        if (userRepository.getUserById(id).getDeleted() == false)
+             return userRepository.getUserPermissions(id);
+        else{
+            System.out.println("The user has been deleted");
+            return null;
+        }
     }
 
-
+    public User updateUserPTO(User user) throws Exception {
+        if (!user.getDeleted())
+             return userRepository.updateUserPto(user);
+        else{
+            System.out.println("The user has been deleted");
+            return null;
+        }
+    }
     public List<UserDepartmentDTO> getUserByDepartment(Integer id){
-        return userRepository.getUsersByDepartment(id);
+        if (!userRepository.getUserById(id).getDeleted())
+             return userRepository.getUsersByDepartment(id);
+        else{
+            System.out.println("The user has been deleted");
+            return null;
+        }
+    }
+
+    public User getUserByEmail(String email){
+        return userRepository.getUserByEmail(email);
     }
 }

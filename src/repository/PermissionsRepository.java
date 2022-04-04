@@ -2,8 +2,12 @@ package repository;
 
 import entity.Department;
 import entity.Permission;
+
+import entity.User;
 import model.DepartmentPermissionsDTO;
+import model.MinimalUserDTO;
 import model.PermissionDTO;
+import model.UserDTO;
 import util.DatabaseConnection;
 
 import java.sql.*;
@@ -73,6 +77,7 @@ public class PermissionsRepository {
         return permission;
     }
 
+
     public Permission getPermissionById(Integer id) {
         Permission permission = null;
         try (PreparedStatement statement = connection.prepareStatement(GET_PERMISSION_BY_ID)) {
@@ -98,8 +103,8 @@ public class PermissionsRepository {
 
     public Permission approve(Integer id) {
         Permission permission = null;
-        try (PreparedStatement statement = connection.prepareStatement(APPROVE_PERMISSION)){
-
+        try{
+            PreparedStatement statement = connection.prepareStatement(APPROVE_PERMISSION);
             statement.setInt(1, id);
             statement.executeUpdate();
 
@@ -114,6 +119,7 @@ public class PermissionsRepository {
         try (PreparedStatement statement = connection.prepareStatement(REJECT_PERMISSION)){
 
             statement.setInt(1, id);
+
             statement.executeUpdate();
 
         } catch (SQLException e) {
@@ -121,8 +127,7 @@ public class PermissionsRepository {
         }
         return permission;
     }
-//    select u.first_name, u.last_name,u.paid_time_off, p.reason, p.from_date,p.to_date, p.permission_status from permission p  join user u on p.user_id = u.id  join department d on d.id = u.department_id where department_id=4;
-//        try (PreparedStatement statement = connection.prepareStatement("select u.first_name, u.last_name,u.paid_time_off, p.reason, p.from_date,p.to_date, p.permission_status from permission p  join user u on p.user_id = u.id  join department d on d.id = u.department_id where department_id=4")){
+
 public List<DepartmentPermissionsDTO> getPermissionByDepartment(Integer id) {
     DepartmentPermissionsDTO departmentPermissionsDTO = null;
     List<DepartmentPermissionsDTO> list = new ArrayList<>();
@@ -148,12 +153,11 @@ public List<DepartmentPermissionsDTO> getPermissionByDepartment(Integer id) {
 
     public Permission getUserPermission(Integer id) {
         Permission permission = null;
-        try (PreparedStatement statement = connection.prepareStatement("SELECT p.from_date, p.to_date,p.reason, u.first_name as firstName, u.last_name as lastname from permission p left join user u on u.id = p.user_id  where p.id = ?")) {
+        try (PreparedStatement statement = connection.prepareStatement("SELECT p.from_date, p.to_date,p.reason, p.user_id, u.first_name as firstName, u.last_name as lastname from permission p left join user u on u.id = p.user_id  where p.id = ?")) {
             statement.setInt(1, id);
             ResultSet result = statement.executeQuery();
             if (result.next()) {
                 permission = new Permission();
-//                permission.setId(result.getInt("id"));
                 permission.setFromDate(result.getDate("from_date").toLocalDate());
                 permission.setToDate(result.getDate("to_date").toLocalDate());
                 permission.setReason(result.getString("reason"));
@@ -164,4 +168,5 @@ public List<DepartmentPermissionsDTO> getPermissionByDepartment(Integer id) {
         }
         return permission;
     }
+
 }

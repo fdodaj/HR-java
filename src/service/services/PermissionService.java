@@ -3,6 +3,7 @@ package service.services;
 
 import entity.Permission;
 import model.DepartmentPermissionsDTO;
+import model.PermissionDTO;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -16,7 +17,7 @@ public interface PermissionService {
 
     Permission deletePermission(Integer id);
 
-    Permission approvePermission(Integer id);
+    Permission approvePermission(Integer id) throws Exception;
 
     Permission rejectPermission(Integer id);
 

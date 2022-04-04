@@ -8,6 +8,15 @@ public class PermissionDTO {
     private String reason;
     private Integer businessDays;
     private String permissionStatus;
+    private Integer userId;
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
     public Date getFromDate() {
         return fromDate;
@@ -42,6 +51,14 @@ public class PermissionDTO {
         this.permissionStatus = permissionStatus;
     }
 
+    public void setFromDate(Date fromDate) {
+        this.fromDate = fromDate;
+    }
+
+    public Date getToDate() {
+        return toDate;
+    }
+
     @Override
     public String toString() {
         return "PermissionDTO{" +
@@ -51,13 +68,5 @@ public class PermissionDTO {
                 ", businessDays=" + businessDays +
                 ", permissionStatus='" + permissionStatus + '\'' +
                 '}';
-    }
-
-    public void setFromDate(Date fromDate) {
-        this.fromDate = fromDate;
-    }
-
-    public Date getToDate() {
-        return toDate;
     }
 }

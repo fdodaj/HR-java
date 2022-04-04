@@ -44,7 +44,9 @@ public class DepartmentRepository {
                 department.setName(result.getString("name"));
                 department.setDescription(result.getString("description"));
                 department.setDeleted(result.getBoolean("is_deleted"));
-                departments.add(department);
+                if (!department.getDeleted()) {
+                    departments.add(department);
+                }
 
             }
         } catch (SQLException e) {

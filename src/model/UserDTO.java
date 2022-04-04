@@ -7,6 +7,16 @@ public class UserDTO {
     private String lastName;
     private String email;
     private String role;
+    private Integer businessDays;
+
+    public Integer getBusinessDays() {
+        return businessDays;
+    }
+
+    public void setBusinessDays(Integer businessDays) {
+        this.businessDays = businessDays;
+    }
+
     private List<PermissionDTO> permissions;
 
     @Override

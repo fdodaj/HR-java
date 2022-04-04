@@ -28,7 +28,8 @@ public final class UserQueries {
     public static final String GET_PERMISSION_BY_ID = "SELECT * FROM permission where id = ?";
     public static final String CREATE_PERMISSION = "INSERT INTO permission(`from_date`, `to_date`, `reason`, `business_days`, `permission_status`, `is_deleted`, `user_id`) VALUES(?,?,?, ?, ?, ?,?)";
     public static final String DELETE_PERMISSION = "UPDATE permission SET is_deleted = true where id = ?";
-    public static final String APPROVE_PERMISSION = "UPDATE permission SET permission_status = 'Approved'  where id  = ?";
+    public static final String APPROVE_PERMISSION = "UPDATE permission SET permission_status = 'Approved'   where id  = ?";
+    public static final String UPDATE_BUSINESS_DAYS = "UPDATE user SET business_days = ? where id =?";
     public static final String REJECT_PERMISSION = "UPDATE permission SET permission_status = 'Rejected'  where id  = ?";
 
 

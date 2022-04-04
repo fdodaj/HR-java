@@ -15,7 +15,10 @@ public class HolidayServicesImpl implements HolidayService {
     }
 
     public Holiday getHolidayById(Integer id){
-        return  holidayRepository.getHolidayById(id);
+        if (!holidayRepository.getHolidayById(id).getDeleted())
+            return  holidayRepository.getHolidayById(id);
+        else
+            return null;
     }
 
     @Override

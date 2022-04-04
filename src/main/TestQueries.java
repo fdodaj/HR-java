@@ -17,7 +17,7 @@ import java.time.LocalDate;
 import java.util.Calendar;
 
 public class TestQueries {
-    public static void main(String[] args) throws ParseException {
+    public static void main(String[] args) throws Exception {
         UserServiceImpl userService = new UserServiceImpl();
         HolidayService holidayService = new HolidayServicesImpl();
         DepartmentService departmentService = new DepartmentServiceImpl();
@@ -46,32 +46,10 @@ public class TestQueries {
 ////        System.out.println(c);
 
 
+//        System.out.println(permissionService.getMinimalData(3));
+
+        System.out.println( userService.listUsers()  + "              ");
+
+
     }
-    public static int getBussinessDays(LocalDate from, LocalDate to) {
-        int businessDays = 0;
-        for (LocalDate date = from; date.isBefore(to); date = date.plusDays(1)) {
-            if (!(isWeekendDay(date) || isHoliday(date))) {
-                businessDays++;
-            }
-        }
-        return businessDays;
-    }
-
-    private static boolean isWeekendDay(LocalDate date) {
-        return (date.getDayOfWeek() == DayOfWeek.SATURDAY || date.getDayOfWeek() == DayOfWeek.SUNDAY);
-    }
-
-    private static boolean isHoliday(LocalDate date) {
-        HolidayService holidayService = new HolidayServicesImpl();
-        int counter = 0;
-        for (Holiday holiday : holidayService.listHolidays()) {
-            if (holiday.getDate().equals(date)) {
-                counter++;
-            }
-        }
-        return counter > 0;
-    }
-
-
-
 }

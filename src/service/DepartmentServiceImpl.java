@@ -22,8 +22,11 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public Department getDepartmentById(Integer id) {
-        return departmentRepository.getDepartmentById(id);
-    }
+        if (!departmentRepository.getDepartmentById(id).getDeleted())
+            return departmentRepository.getDepartmentById(id);
+        else
+            return null;
+        }
 
     @Override
     public Department deleteDepartment(Integer id) {
@@ -37,8 +40,9 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public Department getDepartmentName(Integer id) {
-        return departmentRepository.getDepartmentName(id);
+        if (!departmentRepository.getDepartmentById(id).getDeleted())
+            return departmentRepository.getDepartmentName(id);
+        else
+            return null;
     }
-
-
 }

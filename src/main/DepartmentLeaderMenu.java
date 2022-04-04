@@ -17,7 +17,7 @@ import service.services.PermissionService;
 public class DepartmentLeaderMenu {
     private DepartmentLeaderMenu(){};
 
-    public static void menu(){
+    public static void menu() throws Exception {
         PermissionService permissionService = new PermissionServiceImpl();
         DepartmentService departmentService = new DepartmentServiceImpl();
         UserServiceImpl userService = new UserServiceImpl();
@@ -36,6 +36,7 @@ public class DepartmentLeaderMenu {
             switch (menuItem) {
                 case 1:
                     System.out.println(userService.getUserById(auth.getId()));
+                    break;
                 case 2:
                     System.out.println("All users of " + departmentService.getDepartmentName(auth.getDepartmentId()).printName() + " department");
                     System.out.println(userService.getUserByDepartment(auth.getDepartmentId()));

@@ -65,8 +65,9 @@ public class HolidayRepository {
                 holiday.setDate(result.getDate("date").toLocalDate());
                 holiday.setActive(result.getBoolean("is_active"));
                 holiday.setDeleted(result.getBoolean("is_deleted"));
-                holidays.add(holiday);
-
+                if (!holiday.getDeleted()) {
+                    holidays.add(holiday);
+                }
             }
         } catch (SQLException e) {
             System.err.println(e.getMessage());

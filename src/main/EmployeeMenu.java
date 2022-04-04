@@ -2,6 +2,7 @@ package main;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.Scanner;
@@ -9,10 +10,13 @@ import java.util.Scanner;
 import static main.HrApplication.SCANNER;
 import static main.HrApplication.auth;
 
+import entity.Holiday;
 import entity.Permission;
+import service.HolidayServicesImpl;
 import service.PermissionServiceImpl;
 import service.UserServiceImpl;
 
+import service.services.HolidayService;
 import service.services.PermissionService;
 
 public final class EmployeeMenu {
@@ -51,7 +55,7 @@ public final class EmployeeMenu {
                     System.out.println("Why are you taking this permission");
                     String reason = SCANNER.nextLine();
                     permission.setReason(reason);
-                    permission.setBusinessDays(2);
+                    permission.setBusinessDays(getBusinessDays(LocalDate.parse(startDate), LocalDate.parse(endDate)));
                     permission.setPermissionStatus("Pending");
                     permission.setDeleted(false);
                     int userId = auth.getId();
@@ -74,6 +78,31 @@ public final class EmployeeMenu {
             sc.nextLine();
             exit = sc.nextLine().charAt(0);
         } while (exit != 'Q');
+    }
+
+    private static int getBusinessDays(LocalDate from, LocalDate to) {
+        int businessDays = 0;
+        for (LocalDate date = from; date.isBefore(to); date = date.plusDays(1)) {
+            if (!(isWeekendDay(date) || isHoliday(date))) {
+                businessDays++;
+            }
+        }
+        return businessDays;
+    }
+
+    private static boolean isWeekendDay(LocalDate date) {
+        return (date.getDayOfWeek() == DayOfWeek.SATURDAY || date.getDayOfWeek() == DayOfWeek.SUNDAY);
+    }
+
+    private static boolean isHoliday(LocalDate date) {
+        HolidayService holidayService = new HolidayServicesImpl();
+        int counter = 0;
+        for (Holiday holiday : holidayService.listHolidays()) {
+            if (holiday.getDate().equals(date)) {
+                counter++;
+            }
+        }
+        return counter > 0;
     }
 
 }
