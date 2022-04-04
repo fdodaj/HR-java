@@ -1,5 +1,6 @@
 package main;
 
+import entity.User;
 import service.UserServiceImpl;
 
 import java.util.Scanner;
@@ -9,7 +10,7 @@ import static main.HrApplication.auth;
 
 public class HrMenu {
 
-    private final UserServiceImpl userService = new UserServiceImpl();
+    private static UserServiceImpl userService = new UserServiceImpl();
 
     private HrMenu(){};
     public static void menu(){
@@ -20,6 +21,7 @@ public class HrMenu {
             System.out.println("Press 1 to view your details");
             System.out.println("Press 2 to view all department leaders employees requests");
             System.out.println("Press 3 to Approve or Reject requests ");
+            System.out.println("Press 5 to register a user");
 
             Scanner sc = new Scanner(System.in);
             int menuItem = sc.nextInt();
@@ -31,6 +33,21 @@ public class HrMenu {
                     break;
                 case 3:
                     System.out.println("Approve or reject PD requests");
+                    break;
+                case 4:
+                    User user = new User();
+                    user.setFirstName("first name");
+                    user.setLastName("last name");
+                    user.setEmail("email");
+                    user.setPassword("password");
+                    user.setBirthday(null);
+                    user.setGender("male");
+                    user.setHireDate(null);
+                    user.setPaidTimeOff(50);
+                    user.setDeleted(false);
+                    user.setRole_id(1);
+                    user.setDepartment_id(2);
+                    userService.addUser(user);
                     break;
                 default:
                     System.out.println("Didn't understand that");

@@ -88,7 +88,7 @@ INSERT INTO holiday(id, name, description, date, is_active, is_deleted)  VALUES
     (5,'E diela e Pashkëve Katolike','E diela e Pashkëve Katolike - 21 prill','2019-04-21', 0, 0),
     (6,'E diela e Pashkëve Ortodokse','E diela e Pashkëve Ortodokse - 28 prill','2019-04-28', 0, 0),
     (7,'Dita Ndërkombëtare e Punëtorëve','Dita Ndërkombëtare e Punëtorëve - 01 maj','2019-05-01', 0, 0),
-    (8,'Dita e Bajramit të Madh','Dita e Bajramit të Madh - 04 qershor','2019-06-04', 0, 0)
+    (8,'Dita e Bajramit të Madh','Dita e Bajramit të Madh - 04 qershor','2019-06-04', 0, 0),
     (9,'Dita e Kurban Bajramit','Dita e Kurban Bajramit - 11 gusht','2019-08-11', 0, 0),
     (10,'Dita e Shenjtërimit të Shenjt Terezës','Dita e Shenjtërimit të Shenjt Terezës - 05 Shtator','2019-09-05', 0, 0),
     (11,'Dita Flamurit dhe e Pavarësisë','Dita Flamurit dhe e Pavarësisë - 28 nentor','2019-11-28', 0, 0),
