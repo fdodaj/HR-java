@@ -53,13 +53,7 @@ public class PermissionServiceImpl implements PermissionService {
 
     @Override
     public Permission getPermissionById(Integer id) {
-        if (permissionsRepository.getPermissionById(id).getDeleted() == false){
-            System.out.println("Permission is deleted");
-            return null;
-        }
-        else {
             return permissionsRepository.getPermissionById(id);
-        }
     }
 
     @Override
@@ -69,7 +63,6 @@ public class PermissionServiceImpl implements PermissionService {
 
     @Override
     public Permission approvePermission(Integer id) throws Exception {
-        if (!permissionsRepository.getPermissionById(id).getDeleted() && Objects.equals(permissionsRepository.getPermissionById(id).getPermissionStatus(), "Pending")){
             int userId = permissionsRepository.getPermissionById(id).getUser_id();
             int businessDays = userRepository.getUserById(userId).getPaidTimeOff() - permissionsRepository.getPermissionById(id).getBusinessDays();
             user.setId(userId);
@@ -77,29 +70,15 @@ public class PermissionServiceImpl implements PermissionService {
             userService.updateUserPTO(user);
             return permissionsRepository.approve(id);
         }
-        else {
-            System.out.println("Permission is deleted or already approved");
-            return null;
-        }
-    }
+
 
     @Override
     public Permission rejectPermission(Integer id) {
-        if (!permissionsRepository.getPermissionById(id).getDeleted())
              return permissionsRepository.reject(id);
-        else {
-            System.out.println("The permission has been deleted");
-            return  null;
-        }
     }
     @Override
     public List<DepartmentPermissionsDTO> getPermissionsByDepartment(Integer id) {
-        if (!permissionsRepository.getPermissionById(id).getDeleted())
         return permissionsRepository.getPermissionByDepartment(id);
-        else {
-            System.out.println("The permission has been deleted");
-            return null;
-        }
 
     }
 

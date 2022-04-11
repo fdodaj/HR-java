@@ -36,6 +36,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User deleteUser(Integer id) {
+
         return userRepository.delete(id);
     }
 
@@ -62,7 +63,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public MinimalUserDTO getMinimalData(Integer id) {
-        if (userRepository.getUserById(id).getDeleted() == false)
+        if (!userRepository.getUserById(id).getDeleted())
              return userRepository.getMinimalData(id);
         else{
             System.out.println("The user has been deleted");
@@ -72,7 +73,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO getUserPerm(Integer id) {
-        if (userRepository.getUserById(id).getDeleted() == false)
+        if (!userRepository.getUserById(id).getDeleted())
              return userRepository.getUserPermissions(id);
         else{
             System.out.println("The user has been deleted");
@@ -81,12 +82,12 @@ public class UserServiceImpl implements UserService {
     }
 
     public User updateUserPTO(User user) throws Exception {
-        if (!user.getDeleted())
+//        if (!user.getDeleted())
              return userRepository.updateUserPto(user);
-        else{
-            System.out.println("The user has been deleted");
-            return null;
-        }
+//        else{
+//            System.out.println("The user has been deleted");
+//            return null;
+//        }
     }
     public List<UserDepartmentDTO> getUserByDepartment(Integer id){
         if (!userRepository.getUserById(id).getDeleted())

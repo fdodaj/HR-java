@@ -19,7 +19,7 @@ public class HrMenu {
         char exit;
         do {
             System.out.println("Press 1 to view your details");
-            System.out.println("Press 2 to view all department leaders employees requests");
+            System.out.println("Press 2 to view all department leaders  requests");
             System.out.println("Press 3 to Approve or Reject requests ");
             System.out.println("Press 5 to register a user");
 
@@ -30,6 +30,7 @@ public class HrMenu {
                     System.out.println("your details");
                 case 2:
                     System.out.println("View all DP requests");
+
                     break;
                 case 3:
                     System.out.println("Approve or reject PD requests");
